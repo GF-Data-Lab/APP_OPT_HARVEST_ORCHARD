@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="sql_statement" id="sql_statement">
+	<SimpleField name="FID" type="int"></SimpleField>
+	<SimpleField name="fundo" type="string"></SimpleField>
+	<SimpleField name="jtp" type="string"></SimpleField>
+	<SimpleField name="cc" type="string"></SimpleField>
+	<SimpleField name="especie" type="string"></SimpleField>
+	<SimpleField name="variedad" type="string"></SimpleField>
+	<SimpleField name="porta_inje" type="string"></SimpleField>
+	<SimpleField name="plantacion" type="string"></SimpleField>
+	<SimpleField name="injerto" type="string"></SimpleField>
+	<SimpleField name="densidad" type="string"></SimpleField>
+	<SimpleField name="ha_total" type="float"></SimpleField>
+	<SimpleField name="polinizant" type="string"></SimpleField>
+	<SimpleField name="polinizant2" type="string"></SimpleField>
+	<SimpleField name="poliniza00" type="string"></SimpleField>
+	<SimpleField name="poliniza01" type="string"></SimpleField>
+	<SimpleField name="ha_poliniz" type="string"></SimpleField>
+	<SimpleField name="ha_polin00" type="string"></SimpleField>
+	<SimpleField name="ha_polin01" type="string"></SimpleField>
+	<SimpleField name="ha_polin02" type="string"></SimpleField>
+	<SimpleField name="superficie" type="string"></SimpleField>
+	<SimpleField name="__created" type="string"></SimpleField>
+	<SimpleField name="__modified" type="string"></SimpleField>
+	<SimpleField name="__owner" type="int"></SimpleField>
+	<SimpleField name="nombre" type="string"></SimpleField>
+	<SimpleField name="estado" type="string"></SimpleField>
+</Schema>
+<Folder><name>sql_statement</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">1</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11204</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">KORDIA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">5.9</SimpleData>
+		<SimpleData name="polinizant">SUMMIT</SimpleData>
+		<SimpleData name="polinizant2">SILVIA</SimpleData>
+		<SimpleData name="poliniza00">REGINA</SimpleData>
+		<SimpleData name="poliniza01">SKEENA</SimpleData>
+		<SimpleData name="ha_poliniz">0,2 (3;4%)</SimpleData>
+		<SimpleData name="ha_polin00">0,2 (3,4%)</SimpleData>
+		<SimpleData name="ha_polin01">0,2  (3,4%)</SimpleData>
+		<SimpleData name="ha_polin02">0,2 (3.4%)</SimpleData>
+		<SimpleData name="superficie">5,1</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:02:05</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2891164904279,-34.4486453185815 -71.2881088733412,-34.4487367504239 -71.288184006783,-34.4525920836284 -71.290034070738,-34.4525522884664 -71.2892593286475,-34.4486410203517 -71.2891164904279,-34.4486453185815</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">6</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10033</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">BING</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">9.74</SimpleData>
+		<SimpleData name="polinizant">BLACK TARTARIAN</SimpleData>
+		<SimpleData name="polinizant2">LAPINS</SimpleData>
+		<SimpleData name="poliniza00">RAINIER</SimpleData>
+		<SimpleData name="ha_poliniz">0,52 (5%)</SimpleData>
+		<SimpleData name="ha_polin00">0,52 (5%)</SimpleData>
+		<SimpleData name="ha_polin01">0,52 (5%)</SimpleData>
+		<SimpleData name="superficie">8,18</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/10/27 16:02:58</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2863300097089,-34.4437843192833 -71.2865072920614,-34.444662013749 -71.2868174830966,-34.4461652137522 -71.2873325263141,-34.4486443803077 -71.2877816724033,-34.4486344402469 -71.2888314103763,-34.4485343802001 -71.2891013525434,-34.4484918264925 -71.2892270312595,-34.4484539577986 -71.2888339647658,-34.4467701485042 -71.2882340164359,-34.443604012342 -71.2881766899762,-34.4434597828841 -71.2879290182581,-34.4434628874669 -71.2864387722791,-34.4437449672619 -71.2863300097089,-34.4437843192833</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">25</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10328</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.17</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,17</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:57</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2795982084021,-34.4436262268813 -71.2797199333766,-34.4437566400326 -71.2797748411742,-34.4438124029693 -71.2797940728057,-34.4438893829626 -71.2797247350667,-34.4439333118716 -71.2796801956504,-34.4439784006574 -71.2798216412851,-34.4446230459196 -71.2799459795987,-34.4448528326782 -71.2799736942942,-34.444888641398 -71.2797665358299,-34.4450519608358 -71.279573166786,-34.4450887388354 -71.2794829215134,-34.4449940642072 -71.2793997943393,-34.4450193210881 -71.2793839928624,-34.4450685609591 -71.2793973569651,-34.4451409632447 -71.2795304306541,-34.4452695423543 -71.2795966885131,-34.4453235612783 -71.2796613616825,-34.4453886066078 -71.2798334561217,-34.4455496283953 -71.2801197243654,-34.445493810155 -71.2802163479738,-34.4455424848387 -71.2804911564062,-34.4457153803076 -71.2805881454811,-34.4457774784812 -71.2806506373662,-34.445831567085 -71.2807619370956,-34.4459645172084 -71.2808644961736,-34.4460565272674 -71.2809516316341,-34.4461093445147 -71.2811833467477,-34.4462550096289 -71.281249907842,-34.4463201089641 -71.2812888199545,-34.4463122616537 -71.2805265308963,-34.4428974451337 -71.2804305793904,-34.4429096916342 -71.2795465093313,-34.4434772008904 -71.2795155051029,-34.4435283468398 -71.2795982084021,-34.4436262268813</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">11</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">28303</SimpleData>
+		<SimpleData name="especie">NECTARIN</SimpleData>
+		<SimpleData name="variedad">SWEET GIANT</SimpleData>
+		<SimpleData name="porta_inje">NEMAGUARD</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">2.54</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">2,54</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:59:49</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2834368362607,-34.4590451798983 -71.2835101090473,-34.4607927604417 -71.2835101090473,-34.4607927604417 -71.2849178507423,-34.4607586007406 -71.2848662884912,-34.458995292195 -71.2834368362607,-34.4590451798983</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">14</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10728</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">5.71</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">5.71</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/07 13:40:52</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2930109976743,-34.4560023792162 -71.293710674689,-34.4578166132915 -71.2942278379084,-34.4592080975099 -71.2945251234503,-34.4591993603041 -71.2946359512858,-34.4591627562062 -71.2951114211945,-34.4590141122882 -71.295734946307,-34.4585627962062 -71.2954094302147,-34.4576518491502 -71.2949310090924,-34.4564464980924 -71.2945711851698,-34.4555635043105 -71.2930109976743,-34.4560023792162</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">2</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10727</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.53</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,53</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:06:42</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2937544727038,-34.4507798026677 -71.2942881756173,-34.4521281628817 -71.2962906486238,-34.4516277812361 -71.296285635482,-34.4515823557865 -71.2957395033163,-34.4512397271918 -71.2954562866517,-34.4510434090529 -71.295001697727,-34.4507532302699 -71.2947351053728,-34.4505313595191 -71.2945948847722,-34.4504280804561 -71.2937544030752,-34.4506722693424 -71.2937544727038,-34.4507798026677</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2929359093552,-34.4489638305642 -71.2929293626039,-34.4490722993262 -71.2929926653904,-34.4493066422173 -71.2930140730966,-34.4493281440628 -71.2930333117516,-34.4495460072365 -71.293086794296,-34.4495623101577 -71.2932776400537,-34.4495414223147 -71.2933918596711,-34.4498360131298 -71.2936771694962,-34.4505685279909 -71.2937317247638,-34.4506240205058 -71.2939444115311,-34.450568198756 -71.2944744278802,-34.4504075373569 -71.2944751039436,-34.4502944916273 -71.2941257155067,-34.4499917879203 -71.2939698871104,-34.4498723058525 -71.2939024270204,-34.4496238899256 -71.2938855428161,-34.4494232892417 -71.2938392933339,-34.4493236535138 -71.293761405522,-34.449179542621 -71.2936042908832,-34.4491015476632 -71.2934949912525,-34.4490623158415 -71.2932593672011,-34.4489782222775 -71.2929359093552,-34.4489638305642</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">39</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11706</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="injerto">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">4.12</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">4,12</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/10/27 23:14:36</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2829944519443,-34.4517973225292 -71.2829988918841,-34.4519307342968 -71.2830514540736,-34.4520417940922 -71.2830967342014,-34.452093047997 -71.2831414972979,-34.4521648630586 -71.2831957943989,-34.4522341563699 -71.283234352609,-34.4523549422421 -71.2832864540226,-34.4526599879642 -71.283329555179,-34.45280917258 -71.283378713222,-34.4529006456798 -71.2834268443566,-34.4529873606208 -71.2834740845905,-34.4530776075778 -71.2835148697994,-34.4530955941645 -71.2862284466997,-34.4530416996915 -71.2861861171717,-34.4517360292968 -71.2829944519443,-34.4517973225292</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">3</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10727</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">11.56</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">11,56</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:00</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2820733968526,-34.4425358696529 -71.2820818459958,-34.4429288954259 -71.2821484432344,-34.4435560964524 -71.2822048498369,-34.4442275653209 -71.2822522308439,-34.4444287706594 -71.2823029323323,-34.444451890744 -71.2881547196007,-34.4433714982301 -71.2881345233547,-34.4429567898545 -71.2880800230348,-34.4427056034754 -71.2880328456369,-34.4425123289802 -71.2879771149192,-34.4422489067621 -71.2879293520253,-34.4420374352411 -71.2878805168506,-34.4417833483743 -71.287832540798,-34.4415245582014 -71.2845229156597,-34.4421066571337 -71.2820733968526,-34.4425358696529</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">12</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">27903</SimpleData>
+		<SimpleData name="especie">NECTARIN</SimpleData>
+		<SimpleData name="variedad">WHITE ANGEL</SimpleData>
+		<SimpleData name="porta_inje">NEMAGUARD</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4x2</SimpleData>
+		<SimpleData name="ha_total">2.7</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">2,70</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:48:04</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2848662884912,-34.458995292195 -71.2849178507423,-34.4607586007406 -71.2857760569502,-34.4607417373986 -71.2859423392681,-34.4607636848944 -71.2860643885478,-34.4606578327787 -71.2862390289869,-34.4605683030025 -71.2864146101915,-34.4605132782498 -71.2865186701101,-34.4605113309391 -71.2867174149079,-34.4605421343781 -71.2868245457687,-34.4605573456965 -71.2868010120246,-34.4597900804738 -71.2864951531179,-34.45964914991 -71.2862942949613,-34.4595407767346 -71.2861668373165,-34.4594482462379 -71.2859785011469,-34.4594172471026 -71.2857343801644,-34.4593186060444 -71.2857189619915,-34.4593094299743 -71.2854379515586,-34.459151446427 -71.2852442154502,-34.4589980494773 -71.2848662884912,-34.458995292195</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">4</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10726</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2015</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">8.72</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">8,72</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/10/27 23:38:52</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2927438752658,-34.4519412673622 -71.2929739885088,-34.4525225761844 -71.2929899185671,-34.452550490453 -71.293091749054,-34.4526019412712 -71.2932520756026,-34.4526429198702 -71.2933904283205,-34.4526450105039 -71.293479073542,-34.4526967084526 -71.2935055827389,-34.4527668790783 -71.2934994753321,-34.4529570045661 -71.2935025694129,-34.4531390252036 -71.2935131523717,-34.4532503272432 -71.2934663104394,-34.4533390909472 -71.2933795100865,-34.4534040870606 -71.2931270484743,-34.453617043784 -71.2928009736152,-34.453819392925 -71.2927002994207,-34.4538824855831 -71.2934642920063,-34.455821167627 -71.295454206854,-34.4552783083297 -71.2939676266514,-34.4514693231338 -71.2927580443827,-34.4517997552541 -71.2927438752658,-34.4519412673622</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2916831146639,-34.4558259225993 -71.2918410218127,-34.4562640962164 -71.2918778928163,-34.4562602498171 -71.2934186113438,-34.4558310388167 -71.2926753384919,-34.4539214428358 -71.2926428028886,-34.4538573342102 -71.2925457667237,-34.453879525978 -71.2925345462568,-34.4538499008165 -71.2923789474651,-34.4538932919275 -71.2925241639319,-34.45428420014 -71.2925452006897,-34.4544988746806 -71.2924268043233,-34.4546031321302 -71.2924351544637,-34.4546328111468 -71.2921115504639,-34.4547189243168 -71.2920750677196,-34.4547730604868 -71.2921519441665,-34.4549490099763 -71.2923305680211,-34.4551732575144 -71.2923634993124,-34.4552715210749 -71.2922727296727,-34.4555558064618 -71.2922385181659,-34.4556208067668 -71.2919379912766,-34.4557206382964 -71.2916831146639,-34.4558259225993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">9</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11707</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="injerto">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">4.23</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">4,23</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:59:34</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2833214673862,-34.4567568354198 -71.2835913685664,-34.4569719990817 -71.2837661095743,-34.4570543644769 -71.2838068555077,-34.4570280036798 -71.2847634264343,-34.4564065560418 -71.2857974565003,-34.4557430900167 -71.2857729479653,-34.45498566715 -71.2862910643011,-34.4549728191794 -71.2862745616771,-34.4545058519408 -71.2840449225578,-34.4545558414853 -71.2839883403621,-34.4545773604737 -71.2839936146451,-34.4546326067271 -71.2840383457471,-34.4547328155112 -71.2840399970496,-34.4550042808086 -71.2839288315303,-34.455331577183 -71.2838964181361,-34.4554727084258 -71.2838547935446,-34.4555524474581 -71.2837290983261,-34.4557648186541 -71.2834726819479,-34.4561500839484 -71.2833133735012,-34.4565288469767 -71.2833214673862,-34.4567568354198</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">29</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10325</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2015</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">2.3</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">2.3</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/05/03 16:47:28</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2921471202639,-34.4499727610003 -71.2922991434741,-34.4501960657085 -71.2924137868011,-34.4505062433982 -71.2923660490094,-34.4506311688622 -71.2923562543512,-34.4508276732323 -71.2924262266942,-34.4509612972141 -71.2925778776025,-34.451377684111 -71.2927318753153,-34.4516730615229 -71.2927580443827,-34.4517997552541 -71.2939676266514,-34.4514693231338 -71.2932503585535,-34.4496365792131 -71.2932224820161,-34.4495852729828 -71.2927259092612,-34.4497217754124 -71.2926948633208,-34.4496956770321 -71.2924580298889,-34.4497676335876 -71.2923012677669,-34.4498568364135 -71.2921496917347,-34.4499256607071 -71.2921471202639,-34.4499727610003</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">17</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10728</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.11</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,11</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/12/27 15:52:41</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2962980757853,-34.4551039002188 -71.2972067900557,-34.4574698842779 -71.2972864009595,-34.4574700100008 -71.2987878732499,-34.4563789563413 -71.2984352389157,-34.456168898712 -71.2982350212847,-34.4559858991242 -71.2981432762754,-34.455818075423 -71.29809425335,-34.4555520992909 -71.2977566820624,-34.4555574561403 -71.2976336625369,-34.4552734014582 -71.2970217731452,-34.4552833732675 -71.2969201194683,-34.4549634018247 -71.2967248511561,-34.4549608527336 -71.2962980757853,-34.4551039002188</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">27</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10325</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2015</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">6.7</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">6.7</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/05/03 16:51:47</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2851592250627,-34.4585932063531 -71.2854711453977,-34.4589106075507 -71.2858687264827,-34.459170069068 -71.2862363283349,-34.4593075925522 -71.2868116343071,-34.4595543509538 -71.2873293574411,-34.4598418452751 -71.2875804283858,-34.4599417951512 -71.2877816209991,-34.459953802342 -71.2881864027425,-34.4600623202977 -71.2884617695181,-34.4601513573137 -71.2890824787381,-34.4602559179571 -71.289169503587,-34.4602480680183 -71.2883467274423,-34.4571173027613 -71.2883295561197,-34.4570438914236 -71.2881608731213,-34.4570784184016 -71.2878175973928,-34.4572795444281 -71.2874684957734,-34.4575435146716 -71.2872921454288,-34.4577477337042 -71.287072027358,-34.4580155979609 -71.2868780291965,-34.4581322621378 -71.2865840840498,-34.458194279871 -71.2863558913314,-34.4579654529333 -71.2860799124771,-34.4577186807391 -71.2858570246615,-34.4575921504196 -71.2854014721403,-34.4574676280384 -71.2851674825733,-34.4575033723877 -71.2858151897224,-34.4581216830872 -71.2857327403092,-34.4582149860502 -71.2851617095888,-34.4585427726907 -71.2851592250627,-34.4585932063531</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">40</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11706</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="injerto">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.38</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,38</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:49:23</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2835528363952,-34.4531386016921 -71.2835547280905,-34.4532080628935 -71.2836107763519,-34.4532691206875 -71.2836531034009,-34.4533536003998 -71.2837004818018,-34.4534126568578 -71.2837467078132,-34.4534985960142 -71.2837875080473,-34.4535764339809 -71.2838444304137,-34.4537288754412 -71.2838784822179,-34.4537203969798 -71.2838878781205,-34.454012629636 -71.2838955193038,-34.4541514798934 -71.2839452746149,-34.4544394427812 -71.283984300446,-34.4544718841842 -71.283993690518,-34.4545101976696 -71.2862715319989,-34.4544605691512 -71.2862287533582,-34.4530858616432 -71.2835528363952,-34.4531386016921</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">28</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10325</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2015</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">6.5</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">6.5</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:00:12</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2883578199485,-34.4569680066977 -71.2892355390294,-34.4603064120043 -71.2899418563591,-34.4603544702215 -71.2906934498528,-34.4604204241972 -71.2909499706371,-34.4604831280029 -71.2912313120285,-34.4604950688494 -71.291380193833,-34.4604648749372 -71.2907082136547,-34.4590951194513 -71.2903480423862,-34.458431515192 -71.2903371348865,-34.4583607810574 -71.2902754097355,-34.4582696367555 -71.2900695878505,-34.4578810336936 -71.2899881255679,-34.4575371516427 -71.2894701544656,-34.4565436219435 -71.2890721992829,-34.456615526465 -71.2889411169221,-34.4566728761199 -71.2883578199485,-34.4569680066977</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">20</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10333</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">9.82</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">9,82</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/10/27 16:16:26</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.284354686994,-34.4441338573797 -71.2844256467919,-34.4445185932802 -71.2848073666069,-34.4463825475009 -71.2851028604348,-34.447795077329 -71.2853183027341,-34.4488645947899 -71.2858140118887,-34.4488541517095 -71.2872729238917,-34.4486800188207 -71.2869251762163,-34.4469784084159 -71.2862764537085,-34.4438211060877 -71.2860391858503,-34.4438207672488 -71.284354686994,-34.4441338573797</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">26</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10328</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">1.33</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">1,33</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:49</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.27943042914,-34.4424647679433 -71.2795467226559,-34.4426595513282 -71.2797358900286,-34.4429075089734 -71.2798915248785,-34.4428824316395 -71.2809630380586,-34.4421993797495 -71.2809997769963,-34.4421512812635 -71.2809305549895,-34.4418462829225 -71.2809218586091,-34.4418069646059 -71.2809054555425,-34.4417647254137 -71.2809823285568,-34.4417175003913 -71.2810970131912,-34.4416616374074 -71.2812571391042,-34.4415939292373 -71.2813893658126,-34.4415133110396 -71.2813651950999,-34.4414758139679 -71.2800956523704,-34.441706553648 -71.2799875551267,-34.4417704052722 -71.2798548778036,-34.4418675257229 -71.2797175791028,-34.4420059255003 -71.279606639723,-34.4421666384858 -71.2795062296465,-34.4423086766081 -71.27943042914,-34.4424647679433</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">19</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10727</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.33</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,33</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:22</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2949595632097,-34.4537223544931 -71.2949663197921,-34.4538642849781 -71.2955129550198,-34.4552442142188 -71.2973332027952,-34.4547563413238 -71.2973153473102,-34.4543798105897 -71.2972631241753,-34.4541705007493 -71.2971714531873,-34.4538676482547 -71.2970836366528,-34.4535678780323 -71.2969751810632,-34.4532747152029 -71.2969280726581,-34.4532160195722 -71.2949595632097,-34.4537223544931</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">15</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10728</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">4.57</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">4,57</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:01:20</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2946599242242,-34.455536509135 -71.2946425433016,-34.4555933520091 -71.2957685768321,-34.4584930285886 -71.2958529430768,-34.4584930658779 -71.2971775820775,-34.4575372255385 -71.2967965030332,-34.4564625548801 -71.2962593573698,-34.4551516798075 -71.2960556731189,-34.4551531637376 -71.2946599242242,-34.455536509135</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">21</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10333</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">7.88</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">7,88</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/10/27 16:17:28</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2829339207064,-34.4448859293885 -71.2827547841736,-34.4448949543343 -71.2824371586279,-34.4449788565192 -71.2839927867935,-34.4489977222953 -71.2844846374202,-34.4490004267566 -71.2852730071425,-34.4489082575083 -71.2849994877797,-34.4476108747948 -71.2843118590732,-34.4441790960899 -71.2841194112945,-34.4441803495046 -71.2828469433377,-34.4444201869371 -71.2829339207064,-34.4448859293885</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">10</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10328</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">1.52</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">1,52</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:33</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2797821778361,-34.4410744918866 -71.2798399119767,-34.4410923439862 -71.2799706190641,-34.4411340735084 -71.2803150822544,-34.4412555533786 -71.2807608597013,-34.4411825157985 -71.2809023362718,-34.4412044832962 -71.2817551178014,-34.4407480585676 -71.2812249182887,-34.4406400551119 -71.2800480161217,-34.4403368875146 -71.2797821778361,-34.4410744918866</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2809910519007,-34.4412067035196 -71.2811996163898,-34.4411681074748 -71.2814356750985,-34.4411605462767 -71.2816425307384,-34.4411976976314 -71.2817117437129,-34.4412185795178 -71.2819052302302,-34.4411864833204 -71.2822614481325,-34.4409714318619 -71.282396002115,-34.4408741836861 -71.2819249920019,-34.4407913983376 -71.2816718234934,-34.44083957175 -71.2809910519007,-34.4412067035196</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2800956523704,-34.441706553648 -71.2813651950999,-34.4414758139679 -71.2812795139935,-34.4414400058961 -71.2811348071622,-34.4414312593462 -71.2811059152592,-34.4413620314841 -71.280917171855,-34.4413606866963 -71.2809218165149,-34.4413532988014 -71.2806228680716,-34.4414075524996 -71.2805054387178,-34.4414779785398 -71.2804105272459,-34.4415284242748 -71.280315796885,-34.4415855368017 -71.2801941578306,-34.4416430611645 -71.2800956523704,-34.441706553648</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">18</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10727</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.43</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,43</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:11</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.29436595006,-34.452323744209 -71.2948970603376,-34.4536716990456 -71.2968976011253,-34.4531749486412 -71.2968843895103,-34.4529711247778 -71.2964702070177,-34.4519646775714 -71.2963857420367,-34.4517182954768 -71.2963239507904,-34.4516739370148 -71.2943625562777,-34.4521636327653 -71.29436595006,-34.452323744209</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">8</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11710</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">GP-2</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.5</SimpleData>
+		<SimpleData name="polinizant">LAPINS</SimpleData>
+		<SimpleData name="polinizant2">KORDIA</SimpleData>
+		<SimpleData name="poliniza00">ROYAL DAWN</SimpleData>
+		<SimpleData name="ha_poliniz">0,19 (5,4%)</SimpleData>
+		<SimpleData name="ha_polin00">0,19 (5,4%)</SimpleData>
+		<SimpleData name="ha_polin01">0,19 (5,4%)</SimpleData>
+		<SimpleData name="superficie">2,93</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 19:01:30</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2895313655476,-34.4565305767987 -71.2899064504337,-34.4572347369787 -71.2902212216539,-34.4580042946928 -71.2905037975677,-34.4586332988612 -71.290751379013,-34.4590949411557 -71.2908003685816,-34.459084558198 -71.2917287203556,-34.4587649169338 -71.2916879886545,-34.4586210094875 -71.2915737868002,-34.4584783898161 -71.2914944052701,-34.4582667023023 -71.2914129993233,-34.4580597398607 -71.2913842431319,-34.4579336352927 -71.2913232494327,-34.4577215126652 -71.291252510587,-34.4574417889791 -71.2911446725018,-34.4571706930211 -71.2910000449801,-34.4568013152276 -71.2908927171469,-34.4565521129533 -71.2908430819104,-34.4563285999307 -71.2904452088218,-34.4563344361907 -71.2900874254861,-34.4564181201459 -71.2895313655476,-34.4565305767987</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2927315614963,-34.4581139662145 -71.2928332924674,-34.4584699949865 -71.2934990763919,-34.458244233434 -71.2935207471394,-34.4582030843275 -71.2935055763473,-34.4580651876714 -71.293551989258,-34.4579606578731 -71.2935385363869,-34.4578855550968 -71.2927315614963,-34.4581139662145</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">33</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10502</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">RAINIER</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">2.69</SimpleData>
+		<SimpleData name="polinizant">LAPINS</SimpleData>
+		<SimpleData name="ha_poliniz">0,27 (10,84)</SimpleData>
+		<SimpleData name="superficie">2,22</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/05/12 19:22:23</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2863830611252,-34.4562236569582 -71.2864044977283,-34.4577336997926 -71.286541034663,-34.4579189925639 -71.2868040432082,-34.4579172253497 -71.2869351524166,-34.4578311233834 -71.2870635972409,-34.4577197423557 -71.2871889535909,-34.4575642513592 -71.287322280856,-34.457421320495 -71.2876193512699,-34.4572009601057 -71.287859159598,-34.457049635295 -71.2880879214721,-34.4569112263468 -71.2882086562014,-34.4567936788749 -71.2884181477569,-34.4567187268293 -71.2885412081777,-34.456686406074 -71.2885247481217,-34.4561886115122 -71.2863830611252,-34.4562236569582</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">5</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">21930</SimpleData>
+		<SimpleData name="especie">CIRUELO CP</SimpleData>
+		<SimpleData name="variedad">SWEET PIXIE</SimpleData>
+		<SimpleData name="porta_inje">MARIANA</SimpleData>
+		<SimpleData name="plantacion">2024</SimpleData>
+		<SimpleData name="densidad">3,6X1,8</SimpleData>
+		<SimpleData name="ha_total">12.3</SimpleData>
+		<SimpleData name="polinizant">FLAVOR BLAST</SimpleData>
+		<SimpleData name="ha_poliniz">1,48</SimpleData>
+		<SimpleData name="superficie">10,82</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 17:59:45</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">FORMACION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2898679497255,-34.4449008730806 -71.2907127704317,-34.4489668548921 -71.2907317327458,-34.4489974168017 -71.2907424044141,-34.4490102867792 -71.2923626886706,-34.4489455603754 -71.2914725910386,-34.4446540136729 -71.2898679497255,-34.4449008730806</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2915367493877,-34.4446440672631 -71.292428395032,-34.4489428855784 -71.2925451999171,-34.4489382606165 -71.2926403150622,-34.4488985280768 -71.2926612451425,-34.4486104147557 -71.2927226198613,-34.4484854136015 -71.292750244018,-34.4483633892333 -71.2929436702373,-34.4481776812002 -71.2930189543734,-34.4480198790821 -71.2930545272228,-34.4477258122383 -71.2929310765784,-34.4473986740229 -71.2930578608151,-34.4470731501622 -71.29316568921,-34.4467961156048 -71.2934204456454,-34.4465430946754 -71.2933803976182,-34.446273071509 -71.2931083300097,-34.4456959751373 -71.2931052165526,-34.4456378944992 -71.2930971011425,-34.4454821980403 -71.2934179436242,-34.4452504716227 -71.2935844077564,-34.4449585451787 -71.2941467142313,-34.4447854717149 -71.2955626470791,-34.4440246186942 -71.2915367493877,-34.4446440672631</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">7</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11865</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">KRYMSK 5</SimpleData>
+		<SimpleData name="plantacion">2024</SimpleData>
+		<SimpleData name="densidad">4x2</SimpleData>
+		<SimpleData name="ha_total">8.75</SimpleData>
+		<SimpleData name="superficie">8.75</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/09/11 12:51:19</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">FORMACION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2827413664314,-34.4504651201555 -71.2826989712855,-34.4505890409571 -71.2827142205559,-34.4511492357278 -71.2827676009741,-34.4512903865638 -71.2828132836525,-34.4515674293598 -71.2829018330424,-34.4517378490086 -71.2829500634338,-34.4517590318275 -71.2861889931081,-34.4516835150827 -71.2861457824138,-34.4503948068646 -71.2827413664314,-34.4504651201555</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2827784131794,-34.4504249475499 -71.2861452288102,-34.4503580408456 -71.2860994483538,-34.4489585104425 -71.2850538039555,-34.4490708195488 -71.2849166828718,-34.4490741947329 -71.2848682622603,-34.449082221002 -71.2843076573114,-34.449141646637 -71.2838401220285,-34.4491882433632 -71.2833593515826,-34.4492398629368 -71.2832034463332,-34.4492553952967 -71.2830009493606,-34.4493065912704 -71.2828799513165,-34.4493879931117 -71.2828063119014,-34.4497619102003 -71.2828104596028,-34.450194496353 -71.2827780578189,-34.4502734317844 -71.2827784131794,-34.4504249475499</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">30</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11709</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="injerto">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.34</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,34</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:56:21</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2908124459956,-34.4591455354399 -71.2910074910542,-34.4596223137519 -71.2912114381191,-34.4600109501121 -71.2912844978317,-34.4600504125532 -71.2941934620073,-34.4592736422441 -71.2937937947992,-34.4582434784021 -71.2937271584925,-34.4582321100287 -71.2908124459956,-34.4591455354399</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">42</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11860</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">2.73</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">2,73</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/12/27 15:51:54</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2837944847005,-34.4571339669441 -71.283993355329,-34.4573509079332 -71.2856811347267,-34.4573130381134 -71.2859235808826,-34.4574163078059 -71.2860293491777,-34.4574837353626 -71.2861868233803,-34.4575976080331 -71.2863307265503,-34.4575988815468 -71.286297034532,-34.4555241724451 -71.2862188603011,-34.4555240126306 -71.2837944847005,-34.4571339669441</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">38</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11712</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SKEENA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">1.7</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">1,7</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:02:57</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2881996039418,-34.4540186775804 -71.2883739963163,-34.4540192877332 -71.2898950062755,-34.4530072073292 -71.290071053992,-34.4527891992949 -71.2900765229288,-34.4527101358633 -71.290034070738,-34.4525522884664 -71.288184006783,-34.4525920836284 -71.2881996039418,-34.4540186775804</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">32</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10502</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">RAINIER</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">2.61</SimpleData>
+		<SimpleData name="polinizant">LAPINS</SimpleData>
+		<SimpleData name="ha_poliniz">0,27 (10,34)</SimpleData>
+		<SimpleData name="superficie">2,34</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:52:00</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2885992050524,-34.4566114967566 -71.2886868542492,-34.4566102156204 -71.2890646225888,-34.4564169140402 -71.2891778712812,-34.4563736894867 -71.2893485173053,-34.4563420989138 -71.2899038032084,-34.4562243394756 -71.2904511146232,-34.4560972625314 -71.2907389466293,-34.456028680071 -71.2907699923322,-34.4559791531111 -71.2905800431264,-34.455061052865 -71.2885551134591,-34.4551014285249 -71.2885992050524,-34.4566114967566</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">31</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11709</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="injerto">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.16</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,16</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:57:20</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2913112214367,-34.4600922762411 -71.2912908824288,-34.4601099641399 -71.291435901954,-34.4604933954376 -71.2920009396055,-34.4605016362 -71.2921399542737,-34.4605241768644 -71.2922470205864,-34.46055669109 -71.2926871036435,-34.4607086090659 -71.2930893639719,-34.4607967866786 -71.2934138167266,-34.4608786715899 -71.2937559933998,-34.4608800903223 -71.2940879712931,-34.4608204058378 -71.294291046152,-34.4607600763206 -71.2944033308968,-34.4607077610511 -71.2944645615559,-34.4605904235191 -71.2945614898522,-34.4602558142942 -71.2942139356792,-34.4593297742733 -71.2913112214367,-34.4600922762411</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">37</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11712</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SKEENA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">11</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">11</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:03:11</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2865049694183,-34.4552506785807 -71.2881343557192,-34.4541599739811 -71.288038441585,-34.4487767384265 -71.287702375884,-34.4487869963033 -71.2873167164368,-34.4488313523782 -71.286861451234,-34.4488769197044 -71.2864634350515,-34.4489223155829 -71.28617396836,-34.4489664005733 -71.286365954665,-34.4552540910385 -71.2865049694183,-34.4552506785807</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">34</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10407</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">RAINIER</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.14</SimpleData>
+		<SimpleData name="polinizant">BING</SimpleData>
+		<SimpleData name="ha_poliniz">0,14 (4.6)</SimpleData>
+		<SimpleData name="superficie">3</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 19:00:44</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2885124644111,-34.4540123678846 -71.2885551134591,-34.4551014285249 -71.2905800431264,-34.455061052865 -71.2901853554923,-34.4530672963277 -71.2901605518839,-34.4530299032117 -71.2899994986091,-34.4530312990411 -71.2885124644111,-34.4540123678846</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">23</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10328</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">9.85</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">9.85</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:07:41</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2819491541717,-34.4412244227072 -71.2819653123241,-34.441468756582 -71.2820094287438,-34.4415500489091 -71.2820218621372,-34.4420400793825 -71.2820476686654,-34.44205852657 -71.2820665602378,-34.4424923703424 -71.2863368943671,-34.4417455333084 -71.2877990534062,-34.4414844425856 -71.2877720901159,-34.4412623959803 -71.2877333497437,-34.4411020441038 -71.287674773323,-34.4408394861691 -71.2876365004437,-34.4406238707384 -71.2875726404377,-34.4404143227848 -71.2875280263581,-34.4401767421115 -71.287491723616,-34.439964244566 -71.2874514817295,-34.4398442124606 -71.2874144379751,-34.4397131236114 -71.287296958993,-34.4396695320349 -71.2869333611482,-34.4397448413106 -71.2866716546458,-34.4397922833558 -71.2863591649361,-34.4398629390342 -71.2857102849867,-34.4400360631461 -71.2855305058241,-34.4400836831664 -71.2851536440749,-34.4401696011559 -71.2849800335541,-34.4402328792461 -71.2844327249185,-34.4403599298539 -71.283534855987,-34.4406262121936 -71.2832738916957,-34.4406681347365 -71.2830207117183,-34.4407455159695 -71.2826796883981,-34.4408197600709 -71.2824133309878,-34.4409141519218 -71.2823821137034,-34.4409573703621 -71.2822077310607,-34.4410616719628 -71.2819491541717,-34.4412244227072</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">35</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10407</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">RAINIER</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">1.46</SimpleData>
+		<SimpleData name="polinizant">BING</SimpleData>
+		<SimpleData name="ha_poliniz">0,07 (4,6)</SimpleData>
+		<SimpleData name="superficie">1.39</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:53:07</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2904260667629,-34.4531138929599 -71.2907779975625,-34.4549089747401 -71.2911828182727,-34.4548948948451 -71.291420375217,-34.45485213163 -71.2915042360419,-34.454817388215 -71.291563510099,-34.4547795003186 -71.2912107663924,-34.4530734927318 -71.2904260667629,-34.4531138929599</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">41</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">11860</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">3.2</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">3,2</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 17:58:06</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2863830611252,-34.4562236569582 -71.2885247481217,-34.4561886115122 -71.288457777706,-34.4541361601342 -71.2882807064785,-34.4541426310426 -71.2863696038971,-34.4554241133699 -71.2863830611252,-34.4562236569582</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">36</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10407</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">RAINIER</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">1.3</SimpleData>
+		<SimpleData name="polinizant">BING</SimpleData>
+		<SimpleData name="ha_poliniz">0,06 (4.6)</SimpleData>
+		<SimpleData name="superficie">1.24</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:55:11</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2901762277223,-34.4517736256973 -71.2901754770677,-34.4518841490354 -71.2901974578643,-34.4519200627187 -71.2902775406523,-34.4519245109109 -71.2903630932485,-34.4519485066263 -71.2904526163281,-34.4519831542874 -71.2904704043831,-34.4520396979833 -71.2904697451503,-34.4520878440624 -71.2904748339376,-34.4522971393802 -71.2903263769424,-34.4523062316532 -71.2902704451774,-34.452351447614 -71.2904260667629,-34.4531138929599 -71.2912107663924,-34.4530734927318 -71.2908628330071,-34.4510929228527 -71.2906551776765,-34.4511129503085 -71.2905194177679,-34.4511498377003 -71.2904652006812,-34.451188802072 -71.2904434277708,-34.4512229218144 -71.2905344731625,-34.4516287294452 -71.2905265010372,-34.4517212703902 -71.2902284755512,-34.4517315435217 -71.2901898681809,-34.4517473201516 -71.2901762277223,-34.4517736256973</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">44</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10736</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">ADARA</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">8.4</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">8,4</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/02/04 14:01:38</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2799038990789,-34.4608546059693 -71.2835101090473,-34.4607927604417 -71.2834368362607,-34.4590451798983 -71.2816943145246,-34.4590879176225 -71.2812585633822,-34.4592327034985 -71.2807300584429,-34.459244102087 -71.2804702780596,-34.4593086223675 -71.2803027785381,-34.4594232494023 -71.280179123881,-34.4596154782394 -71.2800503665865,-34.4598973094063 -71.2798917054611,-34.4602676733154 -71.2799038990789,-34.4608546059693</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2818532972015,-34.4589044920816 -71.2818596254752,-34.4590314687155 -71.2848720477699,-34.4589563349766 -71.2851446719877,-34.4589450170965 -71.285138765375,-34.4588666172833 -71.2849264051576,-34.4586555191676 -71.284577571033,-34.4583041035238 -71.2842801673288,-34.458031767987 -71.2840669094555,-34.4578567402943 -71.2838694971959,-34.4577065645707 -71.283795670811,-34.4577079444655 -71.2836680976423,-34.4577559387399 -71.2834502023542,-34.457829056772 -71.2833242966451,-34.4578690873757 -71.2831948366948,-34.4579170262852 -71.2830206271818,-34.4579234362589 -71.2829713795346,-34.4579243564156 -71.2829334801689,-34.4579234420376 -71.2828916842667,-34.457921158238 -71.2828016195379,-34.4579557413501 -71.2826678765533,-34.4580540568209 -71.2825384969054,-34.4581741942141 -71.2824146824369,-34.458291072685 -71.2822482987292,-34.458446514054 -71.282117205751,-34.4585729926931 -71.2820729196537,-34.4586177171145 -71.2819923621889,-34.4587213481948 -71.2818532972015,-34.4589044920816</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">16</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10728</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">4.23</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">4,23</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/12/27 15:52:50</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2948310622703,-34.44994519302 -71.2943844759671,-34.4499865692612 -71.2942825705006,-34.4500536523249 -71.2945209453536,-34.4502610910683 -71.2947094545995,-34.4504302556988 -71.294950115894,-34.4506391829574 -71.2950856533676,-34.4507418284449 -71.2954696872875,-34.4509952940715 -71.2962436259513,-34.4515066181003 -71.2963714138788,-34.4516047205346 -71.2964352895286,-34.4516989762126 -71.2964792540609,-34.4518067661849 -71.2965806779819,-34.452049764788 -71.2967158992105,-34.4523831673514 -71.2967784307107,-34.4525233282774 -71.296832678907,-34.4526690531343 -71.2969572372952,-34.4529964362669 -71.2970882431629,-34.4533691275301 -71.2971704242683,-34.4536368244793 -71.2972515164242,-34.4538975110698 -71.297308753484,-34.4540932961192 -71.297374369575,-34.4543983509709 -71.2974026451534,-34.4545328458806 -71.2974057923987,-34.4547164876804 -71.2974712635304,-34.4546854210721 -71.2975233296482,-34.4548201897318 -71.2976077332787,-34.4550313280477 -71.2976780922073,-34.455211362413 -71.2977913392314,-34.4554564809967 -71.2978148985042,-34.4554843412492 -71.2978688992968,-34.4555193808864 -71.2979333044477,-34.4555181696965 -71.2981514286414,-34.4553853506112 -71.2982881797447,-34.4548442950863 -71.298275087994,-34.4545729559959 -71.2981882988718,-34.4543108449958 -71.2980588920244,-34.4539443445376 -71.2979115433732,-34.4535813361289 -71.2977515239635,-34.4532766145506 -71.2976325290811,-34.4529460630183 -71.2975520352185,-34.4526351585998 -71.2975843407691,-34.4524320113439 -71.2976074871775,-34.4522385007715 -71.2975998491995,-34.4520973081688 -71.2975388983609,-34.4519493660995 -71.2974623183654,-34.4517812565376 -71.297276667839,-34.451575897331 -71.2971203519458,-34.4514061316809 -71.2969534326381,-34.4513308493882 -71.2966729014484,-34.4511900987651 -71.2963623548892,-34.4510609083566 -71.296195559368,-34.4509933745309 -71.2959612225792,-34.4509107043991 -71.2956841634573,-34.4508114397899 -71.2955461898726,-34.4507214600634 -71.2954918740683,-34.4506518122296 -71.2952116412619,-34.4503808031627 -71.2949645442803,-34.4500777129501 -71.2948310622703,-34.44994519302</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">13</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10728</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">SANTINA</SimpleData>
+		<SimpleData name="porta_inje">GISELA 12</SimpleData>
+		<SimpleData name="plantacion">2017</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">10.08</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">10,08</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/12/27 15:53:17</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2954529888753,-34.4596130616904 -71.2955448527701,-34.4596541513082 -71.2961287039402,-34.459441812871 -71.2964156609023,-34.4593312291174 -71.2965402801336,-34.4593132029058 -71.2968127271618,-34.4592954625029 -71.2971672728405,-34.4592997941149 -71.2973286386952,-34.4593093795062 -71.2977332839398,-34.4592750898854 -71.2979358438874,-34.4592649708589 -71.2982237929056,-34.4592627098802 -71.2984694329542,-34.4592329408552 -71.2986465061749,-34.4591934644847 -71.2987445300243,-34.4591744040243 -71.2988149661241,-34.4591180948011 -71.2990739925908,-34.4589546688107 -71.29937583513,-34.458765288115 -71.2994969774777,-34.4586892756204 -71.2996381164927,-34.45865516127 -71.2997077485022,-34.4586350119265 -71.2997318108636,-34.4586157202447 -71.3001837227094,-34.4582304378978 -71.3004799433336,-34.4579737373526 -71.3005693398247,-34.4578464021755 -71.3007418913114,-34.4566579318337 -71.3005990815754,-34.4564282455939 -71.3003386507395,-34.4562620672369 -71.3000443379069,-34.4562675174627 -71.299838576353,-34.4562555261988 -71.2992984823814,-34.456272180494 -71.2991171261017,-34.4562959641627 -71.2989707217049,-34.45634739323 -71.2951698240089,-34.4590394256407 -71.2952430572401,-34.4590851920854 -71.2954529888753,-34.4596130616904</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">24</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">10328</SimpleData>
+		<SimpleData name="especie">CEREZAS</SimpleData>
+		<SimpleData name="variedad">LAPINS</SimpleData>
+		<SimpleData name="porta_inje">COLT</SimpleData>
+		<SimpleData name="plantacion">2016</SimpleData>
+		<SimpleData name="densidad">4X2</SimpleData>
+		<SimpleData name="ha_total">9.76</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">9.76</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2025/01/02 16:08:36</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2806153233151,-34.443113652706 -71.2809467177013,-34.4446021426247 -71.2811744777908,-34.4456253785674 -71.2813084797546,-34.4461970584127 -71.2813542435976,-34.4464081193342 -71.2815661841807,-34.4467009881672 -71.2817849804091,-34.4470379864969 -71.2819342586966,-34.4472704601299 -71.2820404877051,-34.4474642568809 -71.2820854695947,-34.447573926449 -71.2821984492839,-34.4477552480275 -71.2823541287781,-34.4479920183046 -71.282484298762,-34.4481553514223 -71.2826096792278,-34.4483504123859 -71.2827239241581,-34.4485550555929 -71.2828109770439,-34.4488123966983 -71.2829071554907,-34.4491247318626 -71.2830350071189,-34.4491302755211 -71.2834573135095,-34.4491034560592 -71.2839313134914,-34.4490108596157 -71.2830952973568,-34.4468650559385 -71.2825120719335,-34.4453409852404 -71.282196987467,-34.4445124591644 -71.2821714327095,-34.4443350934348 -71.2821329885967,-34.4439379406833 -71.2818879425355,-34.4412766740724 -71.2817969548196,-34.4412964906905 -71.2816946905814,-34.4413899805565 -71.2816208597883,-34.4414434589075 -71.2815497273544,-34.4414905771541 -71.2813535863349,-34.4415999709595 -71.2812493914099,-34.441658793224 -71.2810796955769,-34.4417606621809 -71.2810249233295,-34.4418121619716 -71.2810156107318,-34.4418557824911 -71.2810224237296,-34.4418951359514 -71.2810611782582,-34.442063061566 -71.2811227022731,-34.4423258384501 -71.2811435239723,-34.4424249625926 -71.2810703999607,-34.442504477432 -71.2808306382897,-34.4426565088173 -71.2805862064806,-34.4428150267213 -71.2805532535347,-34.4428637755483 -71.2806153233151,-34.443113652706</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sql_statement">
+		<SimpleData name="FID">43</SimpleData>
+		<SimpleData name="fundo">ALMAHUE</SimpleData>
+		<SimpleData name="jtp">151349</SimpleData>
+		<SimpleData name="cc">40101</SimpleData>
+		<SimpleData name="especie">CITRICO</SimpleData>
+		<SimpleData name="variedad">MURCOTT</SimpleData>
+		<SimpleData name="porta_inje">C-35</SimpleData>
+		<SimpleData name="plantacion">2019</SimpleData>
+		<SimpleData name="densidad">5X2</SimpleData>
+		<SimpleData name="ha_total">34</SimpleData>
+		<SimpleData name="polinizant">Autofertil</SimpleData>
+		<SimpleData name="superficie">34</SimpleData>
+		<SimpleData name="__created">2021/09/07 14:19:05.504</SimpleData>
+		<SimpleData name="__modified">2024/04/30 18:56:03</SimpleData>
+		<SimpleData name="nombre">HGE SPA</SimpleData>
+		<SimpleData name="estado">PRODUCCION</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2795235490598,-34.460984200393 -71.2795630506273,-34.461004375483 -71.2796403248685,-34.4610438564983 -71.2797175991807,-34.4610833374617 -71.2797948760143,-34.4611229084654 -71.2799493352864,-34.4612018718058 -71.2801472080441,-34.4613029198756 -71.2802607206737,-34.4614438507564 -71.2804184446636,-34.4616394814755 -71.2806390567599,-34.4619131695618 -71.2808158906398,-34.4622469853481 -71.2809583658889,-34.4625121260383 -71.2811094182305,-34.4628747260006 -71.2811317601047,-34.4629602105167 -71.2832343758689,-34.4629209360326 -71.2854515464999,-34.4628794825784 -71.2859571491907,-34.4613067599681 -71.2861909862163,-34.4609754541203 -71.2862627343628,-34.4608582842191 -71.2861878288405,-34.4608596858114 -71.2831797623238,-34.4609159331845 -71.2795235490598,-34.460984200393</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2811457930492,-34.4630141215353 -71.2811592312245,-34.463105541119 -71.2812148469569,-34.4633055107594 -71.2812232040245,-34.4633355509967 -71.2813896011206,-34.4636946190373 -71.2814654764341,-34.4637155564807 -71.2815422660555,-34.4637371077694 -71.281619055714,-34.463758659008 -71.2816958454095,-34.4637802101968 -71.2817725454314,-34.463801763011 -71.2818493033158,-34.4638221429001 -71.2819403273182,-34.4638489265108 -71.282002917304,-34.4638665062203 -71.2820797071848,-34.4638880571595 -71.2821564971025,-34.4639096080487 -71.2822332870573,-34.463931158888 -71.2823100770492,-34.4639527096773 -71.2824636595973,-34.4639959011985 -71.2826171501295,-34.4640390041037 -71.2827707305207,-34.4640821051333 -71.2830011038391,-34.4641468463954 -71.2830797031448,-34.464168903711 -71.2831552539619,-34.4642108483187 -71.2833100056196,-34.4642969226266 -71.2834646654234,-34.4643829083092 -71.2835420402976,-34.4644259002334 -71.2836967927343,-34.4645119740168 -71.2837741678422,-34.4645549657836 -71.283851543028,-34.464597957498 -71.2839491152217,-34.4646541824504 -71.2840052920765,-34.4646834186645 -71.2841581399653,-34.4646633448283 -71.2842340741486,-34.4646534522026 -71.2843100058558,-34.4646434694383 -71.2843858478308,-34.4646334883048 -71.2844617794965,-34.4646235054474 -71.2845377135971,-34.4646136126357 -71.2846895768247,-34.4645936466886 -71.2849136160477,-34.4645576382664 -71.2849278453601,-34.4645132946583 -71.285213147675,-34.4636231637936 -71.285415973235,-34.4629902966749 -71.2854144477748,-34.4629343494884 -71.2811457930492,-34.4630141215353</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.3000634593337,-34.4561106783307 -71.3002387892492,-34.4561126058463 -71.300488604743,-34.4561078126532 -71.3005849329233,-34.4561219534175 -71.3006836269811,-34.4561765214186 -71.30080159673,-34.4563480857567 -71.3008586634438,-34.4564326420683 -71.301031814101,-34.4566330928133 -71.3010464914237,-34.4567100644719 -71.3009790935068,-34.4570142866839 -71.3009431300934,-34.457227779159 -71.3024756162882,-34.4577058455896 -71.3026154551268,-34.45754934534 -71.3027615336555,-34.4574141801192 -71.3026721907454,-34.4572296393362 -71.3027239756394,-34.4570237803986 -71.3025480463545,-34.4567876899928 -71.3025384321258,-34.4563820711263 -71.3026512556662,-34.4562550141393 -71.3026284970538,-34.4561877495875 -71.3023956650562,-34.4557978745566 -71.3024789791614,-34.4556453239571 -71.3023852755999,-34.455501246743 -71.3023531224381,-34.4554284804626 -71.3023223065301,-34.4553978734399 -71.302224939726,-34.4552968608148 -71.3021347055974,-34.4552268112475 -71.3020564335129,-34.455196917962 -71.3019401452844,-34.4551716167326 -71.3018118915528,-34.4551615938003 -71.3016971936027,-34.4551582559933 -71.3015455290963,-34.4551683237945 -71.3015250561443,-34.4553804430212 -71.3011182841802,-34.4554378601257 -71.3010312030095,-34.4554368860231 -71.3010221846043,-34.4554418331541 -71.3010040580902,-34.4554517291034 -71.3008148333791,-34.4555549846669 -71.3007778012108,-34.4555823627472 -71.3006318752596,-34.4556903912821 -71.3005170825726,-34.4557752089147 -71.3004858567571,-34.4557983312536 -71.3003710637728,-34.4558831487594 -71.3002251367677,-34.4559911768455 -71.3002042879032,-34.456006532195 -71.3000634593337,-34.4561106783307</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.276408843079,-34.4597548255183 -71.2768867714834,-34.460068705549 -71.2771795871021,-34.4603313198281 -71.2771994355012,-34.4606225471592 -71.2771959557356,-34.4609735202207 -71.2770652229946,-34.4611037727231 -71.2770719580538,-34.4613517076624 -71.2772458832579,-34.4616153654946 -71.2774804720573,-34.461736555541 -71.2775592750275,-34.4617067832208 -71.2777706349224,-34.4612538646296 -71.2779907059197,-34.460982862509 -71.2781190230395,-34.4608925853213 -71.2782733733486,-34.4608520295749 -71.2785800062192,-34.4608368471037 -71.2788070707111,-34.4608232380327 -71.279414846834,-34.4608715725696 -71.2798125064862,-34.4608735276855 -71.2798130734963,-34.4603366540272 -71.2794286857298,-34.4604034971291 -71.2790337482357,-34.4603827411914 -71.2786982624152,-34.4603071528507 -71.2783623310641,-34.4602316620197 -71.2783471003586,-34.4598694100497 -71.2780560948373,-34.4595545748072 -71.2779364598447,-34.4594060940954 -71.2775591196501,-34.4594712675164 -71.2771781748476,-34.4596086175736 -71.2767932536316,-34.4596723074541 -71.2767335075538,-34.45970641135 -71.2764121508601,-34.4596684114183 -71.276408843079,-34.4597548255183</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.286883568627,-34.4598290073043 -71.2869077804268,-34.4607165039335 -71.2869815614535,-34.4607495556769 -71.2870624441877,-34.4607961754225 -71.2871135823014,-34.4608348789235 -71.2871536508227,-34.4608691925758 -71.2871932376717,-34.4609055884051 -71.2872721152716,-34.460970813972 -71.2873527108402,-34.461020052894 -71.2874158282154,-34.4610569996537 -71.2874383166192,-34.4610719922405 -71.2874809954214,-34.4610967022813 -71.2875563169621,-34.4611500058746 -71.2875674717038,-34.461558753171 -71.287625384985,-34.4615661418401 -71.2879285359507,-34.4616338378621 -71.2878858670288,-34.4619087465003 -71.2879744014791,-34.461975863918 -71.2880743074543,-34.461772354347 -71.2881767419848,-34.4614247568334 -71.2883547299208,-34.4614480141237 -71.2885094712038,-34.4614646758092 -71.2885506229253,-34.4613709727547 -71.2887977452163,-34.4611124250509 -71.2889088713188,-34.4611917379142 -71.2891491729742,-34.4613210908672 -71.2892129020524,-34.4613573942476 -71.2893046792059,-34.4614019154473 -71.2893704321665,-34.4616667706983 -71.2894777740282,-34.4616534920944 -71.2894400050101,-34.4614010924164 -71.2894854098806,-34.4613415617996 -71.2894637661507,-34.4605491137835 -71.2893024233409,-34.4605174337847 -71.2891490927321,-34.4604833500092 -71.2888656422478,-34.4604040206466 -71.288644963366,-34.4603752540538 -71.2884597494988,-34.4603502395784 -71.2883062350322,-34.4603093978222 -71.2882292675866,-34.4602812740077 -71.2881107312722,-34.4602263463702 -71.2880750352971,-34.4602141250994 -71.2879981540743,-34.4601891543509 -71.2879214646887,-34.460171210726 -71.2878170524199,-34.4601569409783 -71.2876922264713,-34.4601444955621 -71.2876157338663,-34.4601337590999 -71.287448008523,-34.4601016552846 -71.2872955516377,-34.4600403311029 -71.2870357336389,-34.4599026863916 -71.286883568627,-34.4598290073043</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2948323936776,-34.4603684465621 -71.2955534011751,-34.4609200667904 -71.2956163384546,-34.4609077072233 -71.2958825187249,-34.461001767293 -71.2962864754135,-34.4613712224885 -71.2964323951443,-34.4615441585621 -71.2964477181781,-34.4615039395137 -71.2966332002463,-34.4613289209319 -71.2966139289574,-34.4613167540156 -71.2966205563449,-34.4610148480757 -71.2965841287611,-34.4607171766427 -71.2965089946876,-34.4604055402356 -71.2967276244096,-34.4601006408798 -71.297049328639,-34.4596596783439 -71.2973486675845,-34.4595358797847 -71.2973266667937,-34.4595190771264 -71.2968224805904,-34.459513863375 -71.2963635160553,-34.459609743527 -71.2959352677886,-34.4597850871949 -71.2956101015163,-34.4599327132955 -71.2952104314609,-34.4601423107533 -71.2948949418265,-34.4603123778225 -71.2948323936776,-34.4603684465621</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.3001066618141,-34.4586961881469 -71.3001842368325,-34.4587921667092 -71.3003454504066,-34.4586392326293 -71.3004032600089,-34.4586134465142 -71.3007682616387,-34.4586816587954 -71.3007993483039,-34.4587548060972 -71.3011084218047,-34.4587930630944 -71.30146913612,-34.4589110198747 -71.3017183667285,-34.4589924967986 -71.3018256683924,-34.4591250510114 -71.301922283369,-34.459018761254 -71.3018906362719,-34.458752009017 -71.3018799048055,-34.4586618932004 -71.30181222639,-34.4583249714693 -71.3018335257147,-34.4582639075337 -71.301953920129,-34.4580496354851 -71.3022067157309,-34.4580093583877 -71.3022602592548,-34.4580047440168 -71.3023403559883,-34.4578918245845 -71.3024149243109,-34.4577867611196 -71.3024476722034,-34.4577406244907 -71.3009338642011,-34.4572825771246 -71.3008859580663,-34.4576233887029 -71.3008182388004,-34.4580271289401 -71.3007620767129,-34.4580998459866 -71.300512478001,-34.4582730131029 -71.3002909441788,-34.4584746757336 -71.300211546893,-34.4585870398878 -71.3001639496374,-34.4586415678841 -71.3001066618141,-34.4586961881469</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2916291922097,-34.4628623804054 -71.2916749968611,-34.4629061395316 -71.2918756626657,-34.4629051698267 -71.2919680602174,-34.4628015807585 -71.292003438249,-34.4626970782481 -71.2922478921772,-34.4624134253302 -71.2923807650187,-34.4623720829751 -71.2927047397016,-34.4623411259869 -71.2927008141947,-34.4621976100067 -71.2937471807762,-34.4611549959941 -71.2937460073222,-34.4611121123976 -71.2934326763717,-34.461098884975 -71.2930488485631,-34.4609955799937 -71.2924142184551,-34.4608418152431 -71.2924077075386,-34.4612010468019 -71.2923414778144,-34.4614048292603 -71.2921450978244,-34.4617987204989 -71.2917938777234,-34.4624679126713 -71.2916358755111,-34.4627686919145 -71.2916291922097,-34.4628623804054</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2927772746656,-34.4622070818961 -71.2927806778703,-34.4623314984423 -71.2929210315685,-34.4622880320907 -71.2929614752332,-34.4622867322632 -71.2931743071954,-34.4622777802738 -71.2935021860284,-34.4622714456791 -71.2936121658918,-34.4622692910109 -71.2937110472189,-34.462173150538 -71.2938575716861,-34.462030505776 -71.2940058478997,-34.4618862956123 -71.2940980806755,-34.461796499181 -71.2942234178317,-34.4617061712175 -71.2943396248742,-34.4616233157426 -71.2944558316852,-34.4615404601653 -71.2945683396091,-34.461460197806 -71.2947479957245,-34.4613345066825 -71.2950598842336,-34.4611179964474 -71.2953107956561,-34.460992047702 -71.2953787077109,-34.4609581419951 -71.2954467118831,-34.4609243246587 -71.2947918909762,-34.4604232899847 -71.2947247576383,-34.460646289957 -71.2945745305495,-34.4609584644056 -71.2944066914553,-34.4610141666622 -71.2941837712618,-34.4610479177929 -71.2938971841329,-34.4610903452868 -71.2927772746656,-34.4622070818961</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2849838945894,-34.4645444257023 -71.2852796833055,-34.4643154412838 -71.2854156825075,-34.4641482152354 -71.2855216362612,-34.4640180569899 -71.2856602894289,-34.4637013321972 -71.285757631501,-34.4633179568792 -71.2858142761614,-34.4629825752077 -71.2858773986576,-34.4627004340236 -71.2859843984821,-34.4623915121201 -71.2860805295793,-34.4622139443231 -71.2862005009881,-34.4619758984391 -71.2862894963428,-34.4617934162776 -71.2862683689695,-34.461018804777 -71.2862392558839,-34.4610143018032 -71.2862138475699,-34.4610502014821 -71.2861877043752,-34.4610854839401 -71.286135651441,-34.4611514474319 -71.2860762496133,-34.4612375590488 -71.286014803929,-34.4613375901372 -71.2854352364801,-34.4631404668656 -71.2849838945894,-34.4645444257023</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2782893363798,-34.4592961262742 -71.2785347613402,-34.4594859779971 -71.2786151653687,-34.4596571834417 -71.278672441371,-34.459690728379 -71.2786808418884,-34.4598412828344 -71.2787640778358,-34.4599746674291 -71.2790030316991,-34.4601178570796 -71.2794007918957,-34.4601104373644 -71.2796155014432,-34.4599858267723 -71.2797365610964,-34.4599126293249 -71.2797142593666,-34.4593697824541 -71.2799890432024,-34.4591605823982 -71.2800010450567,-34.459044170294 -71.2793650951724,-34.4590748743645 -71.279132546402,-34.4591671872077 -71.2787722045508,-34.4592963158309 -71.2784471750516,-34.4591924986877 -71.2782916330004,-34.4591890893549 -71.2782893363798,-34.4592961262742</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2976168701009,-34.4595138907665 -71.2976175243859,-34.4595181149397 -71.2979703073765,-34.459752779401 -71.298110033397,-34.4599845998157 -71.2982484711073,-34.4601890423947 -71.2984175944018,-34.4603701928476 -71.2985836076482,-34.460293877951 -71.2987270280245,-34.4602250186384 -71.2989084525739,-34.4601379573847 -71.2990060043656,-34.4600852841909 -71.2991580234801,-34.4599078268646 -71.2992218210546,-34.4594229471214 -71.2994845417395,-34.4590571816062 -71.2994802376528,-34.4590278776963 -71.2991523075779,-34.4592511005246 -71.298828554706,-34.4594205217966 -71.2986367250373,-34.4594586535696 -71.2979302212999,-34.4595018685926 -71.2976168701009,-34.4595138907665</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2741759143656,-34.4590836824609 -71.274187919838,-34.4592483220319 -71.2745096756601,-34.4593474342379 -71.2747388350801,-34.4594342980409 -71.275209735095,-34.4594663630406 -71.2755102347344,-34.4595031321092 -71.2756485579357,-34.4595037108311 -71.2758980523533,-34.4595461160639 -71.2759032885264,-34.4594612885343 -71.2757817626357,-34.4593488060269 -71.2755699353262,-34.459189600905 -71.2752160998782,-34.4590031138634 -71.2748778228977,-34.4587581968698 -71.2747223670967,-34.4587579362016 -71.2745029604663,-34.4588452183162 -71.2741759143656,-34.4590836824609</coordinates></LinearRing></outerBoundaryIs></Polygon><Polygon><outerBoundaryIs><LinearRing><coordinates>-71.2863403384332,-34.4608636825756 -71.2863617440298,-34.4616484744582 -71.2863773447557,-34.4616182566978 -71.2864093879505,-34.4615590673521 -71.2864442267909,-34.4615003665106 -71.2864719171656,-34.4614592862118 -71.2865177751987,-34.4614129984651 -71.2865371693162,-34.4614001063357 -71.2865853375119,-34.4613792843944 -71.2866132612074,-34.461373083116 -71.2866964620579,-34.4613730583489 -71.2867821599824,-34.4613921861887 -71.2869276316555,-34.4614474221781 -71.287102223047,-34.4615304162436 -71.2872638304546,-34.4616112193876 -71.2875019959256,-34.4615505145422 -71.2874917585353,-34.4611753715364 -71.2874410575398,-34.4611395444368 -71.2873991983848,-34.4611152697277 -71.2873764383949,-34.4611001920802 -71.2873487076316,-34.4610838554146 -71.2873149627763,-34.4610642060845 -71.2872766465296,-34.461041487491 -71.2872291629131,-34.4610117294546 -71.2871920681674,-34.4609811459595 -71.2871458785733,-34.4609428906915 -71.2871059230642,-34.4609061411957 -71.287068059134,-34.46087367916 -71.287021596857,-34.4608385837771 -71.2869472787025,-34.4607957170688 -71.2868959404023,-34.4607727012599 -71.2868381493639,-34.4607467415083 -71.2868123432212,-34.4607351460089 -71.2867707044088,-34.460722224343 -71.2867067064414,-34.4607089098823 -71.2866632009927,-34.4607098142334 -71.2865803632894,-34.4607198374901 -71.2864951747145,-34.4607390987645 -71.2864417546676,-34.46076479626 -71.2863878060802,-34.4608106044065 -71.2863403384332,-34.4608636825756</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,314 +1,912 @@
-# app.py  ·  versión 2025‑06
-import streamlit as st, numpy as np, pandas as pd, matplotlib.pyplot as plt, math
+"""
+Streamlit app that allocates *k* harvest bins (medoids) in an orchard
+with blocked (row‑constrained) distances and per‑bin capacity
+constraints.
 
-# ═════════════════ 0 · INPUT UI ═════════════════
-st.title("Simulador integral de cosecha · layouts, bines y kg")
+Extended features (2025‑07‑15 → 2025‑07‑15 b)
+----------------------------------------------
+* **Dynamic orchard blocks by team** – scans `equipo<N>.json` files.
+* **Instant preview** – displays a K‑means view of the chosen rows.
+* **Row selector** – after picking a block (or manual list) you can
+  *elegir las hileras exactas* que se utilizarán antes de ejecutar el
+  algoritmo.  A multiselect enumerates each row under the preview; hit
+  “Guardar cambios” to refresh the preview.
+* Final constrained k‑medoids allocation unchanged.
+"""
 
-# --- Huerto ---
-st.sidebar.header("Huerto")
-arboles_txt = st.sidebar.text_input("Árboles por cara (ej. 40,45)", "40,45")
+from __future__ import annotations
+
+import json
+import random
+from pathlib import Path
+from typing import Dict, List, Any, Tuple
+
+import numpy as np
+import streamlit as st
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import numpy as np
+import plotly.graph_objects as go
+# Try to import scikit‑learn for KMeans preview; otherwise use fallback
 try:
-    ARBOLES_CARA = [int(x) for x in arboles_txt.split(",") if x.strip()]
-except ValueError:
-    st.sidebar.error("Usa enteros separados por coma"); st.stop()
+    from sklearn.cluster import KMeans  # type: ignore
+    _HAS_SKLEARN = True
+except ImportError:  # pragma: no cover
+    _HAS_SKLEARN = False
 
-A_X = st.sidebar.number_input("A_X – dist. hileras (m)", .5, 10.0, 4.0, .1)
-D_Y = st.sidebar.number_input("D_Y – dist. árbol‑árbol (m)", .5, 10.0, 2.0, .1)
+import plotly.graph_objects as go
+import numpy as np
 
-# --- Rendimientos base ---
-st.sidebar.header("Rendimiento individual")
-SPEED_MEAN = st.sidebar.number_input("Velocidad media (m/min)", 1.0, 500.0, 4000/60, 1.)
-SPEED_SD   = st.sidebar.number_input("SD velocidad", 0.0, 200.0, 500/60, 1.)
-TREES_MEAN = st.sidebar.number_input("Árboles/tote media", .1, 10.0, 1.5, .1)
-TREES_SD   = st.sidebar.number_input("SD árboles/tote", 0.0, 10.0, .5, .1)
+def preview_kmeans_plotly(
+    XY: np.ndarray,
+    labels: np.ndarray,
+    centroids: np.ndarray,
+    dx: float,
+    row_width: float,
+    rows: int,
+    dy_tree: float,
+) -> go.Figure:
+    """Devuelve un Figure Plotly con la vista previa K-means."""
+    fig = go.Figure()
 
-# --- KG ---
-st.sidebar.header("Parámetros de kg")
-KG_TREE = st.sidebar.number_input("Kg por árbol", 1.0, 200.0, 25.0, 0.5)
-KG_TOTE = st.sidebar.number_input("Kg por tote", 1.0, 500.0, 18.0, 0.5)
+    # ── Rectángulos de fondo (“hileras”) ─────────────────────────
+    for r in range(rows):
+        xc = r * dx
+        fig.add_shape(
+            type="rect",
+            x0=xc - row_width / 2,
+            y0=0,
+            x1=xc + row_width / 2,
+            y1=XY[:, 1].max() + dy_tree if len(XY) else dy_tree,
+            line=dict(color="rgba(0,0,0,0.4)", width=1),
+            fillcolor="rgba(200,200,200,0.25)",
+            layer="below",
+        )
 
-# --- Jornada ---
-st.sidebar.header("Jornada")
-START_MIN = st.sidebar.number_input("Inicio jornada (min)", 0, 24*60, 8*60, 1)
-END_MIN   = st.sidebar.number_input("Fin jornada (min)",    0, 24*60,13*60, 1)
+    # ── Puntos de árboles por cluster ────────────────────────────
+    k = centroids.shape[0]
+    for c in range(k):
+        pts = XY[labels == c]
+        if len(pts):
+            fig.add_trace(
+                go.Scatter(
+                    x=pts[:, 0],
+                    y=pts[:, 1],
+                    mode="markers",
+                    marker=dict(size=4),
+                    name=f"Cluster {c+1}",
+                )
+            )
 
-# --- Bines ---
-st.sidebar.header("Bines")
-BIN_CAP        = st.sidebar.number_input("Cap. bin (totes)", 1, 400, 20, 1)
-BIN_TIME_LIMIT = st.sidebar.number_input("Lím. tiempo bin (min)", 1, 240, 30, 1)
-BINS_USER      = st.sidebar.number_input("Bines disponibles", 1, 400, 20, 1)
-#BINS_KM = math.ceil(TOTAL_TOTES_EST / BIN_CAP)   # mismo cálculo teórico
+    # ── Centroides ───────────────────────────────────────────────
+    if len(centroids):
+        fig.add_trace(
+            go.Scatter(
+                x=centroids[:, 0],
+                y=centroids[:, 1],
+                mode="markers",
+                marker=dict(symbol="x", size=12, line=dict(width=2)),
+                name="Centroides K-means",
+            )
+        )
 
-# --- Layouts & workforce ---
-st.sidebar.header("Layouts y mano de obra")
-LAYOUTS_ALL = ["normal_4", "calle_central", "bajo_hilera", "extremos_calle"]
-LAYOUTS_ON  = st.sidebar.multiselect("Layouts a comparar", LAYOUTS_ALL, default=LAYOUTS_ALL)
+    # ── Layout general ───────────────────────────────────────────
+    fig.update_yaxes(scaleanchor="x", scaleratio=1)
+    fig.update_layout(
+        title="Vista previa (K-means)",
+        xaxis_title="x (m)",
+        yaxis_title="y (m)",
+        margin=dict(l=40, r=160, t=60, b=40),
+        legend=dict(x=1.02, y=1, xanchor="left"),
+        height=500,
+    )
+    return fig
 
-pp_text = st.sidebar.text_input("Personas por cara a simular (ej. 2,3,6,20)", "2,3,6")
-try:
-    PP_LIST = sorted({int(x) for x in pp_text.split(",") if x.strip()})
-    if not PP_LIST: raise ValueError
-except ValueError:
-    st.sidebar.error("Introduce enteros separados por coma"); st.stop()
+# ────────────────────────────────────────────────────────────────
+# 0 · Utilities to load orchard‑block JSON files by team
+# ────────────────────────────────────────────────────────────────
 
-PRICE_TOTE = st.sidebar.number_input("Pago por tote ($)", 0.0, 50.0, 1.25, .05)
+def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
+    """Return mapping ``team_name → list_of_blocks``.
 
-# --- Detalle (1 layout + 1 pp) ---
-st.sidebar.header("Detalle backlog / kg")
-LAY_DET = st.sidebar.selectbox("Layout detallado", LAYOUTS_ON)
-PP_DET  = st.sidebar.selectbox("PP‑cara detallado", PP_LIST)
-
-SEED = st.sidebar.number_input("Seed", 0, 999_999, 11, 1)
-INVERT_X = st.sidebar.checkbox("Invertir eje X", True)
-
-# ═════════════════ 1 · GEOMETRÍA ═════════════════
-def make_bin_sets(arboles_cara, a_x=4., d_y=2., gap_x=2., gap_y=2., y_off=-5.):
-    n=len(arboles_cara); xc=np.arange(n)*a_x; cx=(n-1)*a_x/2; L=(max(arboles_cara)-1)*d_y
-    return {
-        "normal_4":      [(cx-gap_x/2,y_off+gap_y),(cx-gap_x/2,y_off),
-                          (cx+gap_x/2,y_off),     (cx+gap_x/2,y_off+gap_y)],
-        "calle_central": [(cx, L/3),(cx, 2*L/3)],
-        "bajo_hilera":   [(x,y_off) for x in xc],
-        "extremos_calle":[(x,0) for x in xc]+[(x,L) for x in xc],
-    }
-BIN_SETS = make_bin_sets(ARBOLES_CARA, A_X, D_Y)
-
-def trees_xy():
-    pts=[]
-    for h,n in enumerate(ARBOLES_CARA):
-        for s in (-.5,.5):
-            for k in range(n):
-                pts.append((h*A_X+s, k*D_Y))
-    return np.array(pts,float)
-TREES = trees_xy()
-# ── distancia 'row‑path'   (sin atravesar hileras) ───────────────────
-def row_path_dist(p1, p2, L):
+    *Scans for files matching ``equipo*.json``.*
     """
-    Distancia mínima entre p1=(x1,y1) y p2=(x2,y2)
-    suponiendo que sólo puedo desplazarme:
-       · en Y dentro de la misma hilera
-       · en X únicamente por cualquiera de los extremos y=0 o y=L
-    """
-    x1,y1 = p1; x2,y2 = p2
-    # camino vía extremo inferior
-    d0 = abs(y1-0) + abs(x1-x2) + abs(y2-0)
-    # camino vía extremo superior
-    dL = abs(y1-L) + abs(x1-x2) + abs(y2-L)
-    return min(d0, dL)
+    team_data: Dict[str, List[dict]] = {}
+    for path in Path(directory).glob("equipo*.json"):
+        try:
+            with open(path, "r", encoding="utf‑8") as fh:
+                data = json.load(fh)
+            blocks = data.get("ORCHARD_BLOCKS", [])
+            if isinstance(blocks, list):
+                team_data[path.stem] = blocks
+        except Exception as exc:  # pragma: no cover
+            # Save the error for later feedback
+            team_data[path.stem] = exc  # type: ignore[assignment]
+    return team_data
 
-# ── k‑medoids simplificado con la métrica anterior ────────────────────
-def kmedoids_rows(points, k, rng, iters=30):
-    """
-    points : np.ndarray (N,2)  -> coordenadas de los árboles
-    k      : nº de bines
-    Devuelve array (k,2) con las posiciones elegidas (medoides).
-    """
-    # inicializamos con k puntos aleatorios
-    idx = rng.choice(len(points), k, replace=False)
-    medoids = points[idx].copy()
-    L = points[:,1].max()               # longitud de las hileras
 
-    for _ in range(iters):
-        # Paso 1: asignación a medoid más cercano
-        labels = np.empty(len(points), int)
-        for i,p in enumerate(points):
-            d = [row_path_dist(p, m, L) for m in medoids]
-            labels[i] = int(np.argmin(d))
+def blocks_to_trees_per_face(block: dict) -> List[int]:
+    """Convert one block's *hileras* into the ``trees_per_face`` list."""
+    pairs = block.get("hileras", [])
+    if not pairs:
+        return []
+    max_row = max(row for row, _ in pairs)
+    tpf = [0] * max_row
+    for row, count in pairs:
+        if 1 <= row <= max_row:
+            tpf[row - 1] = count
+    return tpf
 
-        # Paso 2: para cada cluster buscamos el punto que minimiza distancias
-        new_medoids = medoids.copy()
-        for j in range(k):
-            cluster_pts = points[labels == j]
-            if len(cluster_pts) == 0:
-                continue
-            # matriz de distancias dentro del cluster
-            D = np.array([[row_path_dist(a,b,L) for b in cluster_pts] for a in cluster_pts])
-            new_medoids[j] = cluster_pts[np.argmin(D.sum(axis=1))]
-        if np.allclose(new_medoids, medoids):
+# ────────────────────────────────────────────────────────────────
+# Helper · Compute XY coordinates from trees_per_face
+# ────────────────────────────────────────────────────────────────
+
+def orchard_xy(
+    trees_per_face: List[int],
+    dx_row: float,
+    dy_tree: float,
+    row_width: float,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return (XY, row_id, side_arr) for plotting / algorithms."""
+    rows = len(trees_per_face)
+    half_w = row_width / 2.0
+    trees: list[tuple[float, float, int, int]] = []
+    for r, n in enumerate(trees_per_face):
+        xc = r * dx_row
+        for side in (0, 1):  # 0‑west, 1‑east
+            x = xc + (-half_w if side == 0 else half_w)
+            for k in range(int(n)):
+                trees.append((x, k * dy_tree, r, side))
+    arr = np.asarray(trees, float)
+    return arr[:, :2], arr[:, 2].astype(int), arr[:, 3].astype(int)
+
+# ────────────────────────────────────────────────────────────────
+# Preview · K‑means clustering (Euclidean) for quick visual check
+# ────────────────────────────────────────────────────────────────
+
+def kmeans_preview(XY: np.ndarray, k: int, seed: int = 1) -> Tuple[np.ndarray, np.ndarray]:
+    """Return (labels, centroids) from a simple K‑means run."""
+    if _HAS_SKLEARN and len(XY) >= k:
+        km = KMeans(n_clusters=k, n_init=5, random_state=seed).fit(XY)
+        return km.labels_, km.cluster_centers_
+
+    # Fallback lightweight implementation (Lloyd's algorithm)
+    rng = np.random.default_rng(seed)
+    centroids = XY[rng.choice(len(XY), size=k, replace=False)] if len(XY) else np.empty((0, 2))
+    for _ in range(10):
+        if not len(XY):
+            return np.array([], int), centroids
+        d2 = ((XY[:, None, :] - centroids[None, :, :]) ** 2).sum(axis=2)
+        labels = d2.argmin(axis=1)
+        new_centroids = np.vstack([XY[labels == c].mean(axis=0) for c in range(k)])
+        if np.allclose(new_centroids, centroids):
             break
-        medoids = new_medoids
-    return medoids
-USE_KMEDOIDS = st.sidebar.checkbox(
-    "Ubicar bines con k‑medoids (prohibido cruzar hileras)",
-    value=False)
-# ═════════════════ 2 · SIMULADOR ═════════════════
-def fatigue(now, shift, rng):
-    HARV_START, HARV_END, HARV_SD = 20,25,5
-    mu = HARV_START + np.clip((now-START_MIN)/shift, 0,1)*(HARV_END-HARV_START)
-    return max(1, rng.normal(mu, HARV_SD))
-
-def run_sim(ppface:int, bins_xy:np.ndarray, rng)->dict:
-    W = ppface*len(ARBOLES_CARA)*2
-    n_bins=len(bins_xy); bin_load=np.zeros(n_bins,int); bin_start=[None]*n_bins; open_bin=0
-    face_to_idx={}
-    for i,(h,s) in enumerate([(h,s) for h in range(len(ARBOLES_CARA)) for s in (0,1)
-                              for _ in range(ARBOLES_CARA[h])]):
-        face_to_idx.setdefault((h,s),[]).append(i)
-    for lst in face_to_idx.values(): lst.sort(key=lambda ix: TREES[ix][1])
-
-    workers_face=[fc for fc in face_to_idx for _ in range(ppface)]
-    speed=rng.normal(SPEED_MEAN,SPEED_SD,W).clip(1,None)
-    ptr={}; pos=[]
-    for fc in workers_face:
-        i=ptr.get(fc,0); ptr[fc]=i+1
-        pos.append(tuple(TREES[face_to_idx[fc][i]]))
-    w_time=np.zeros(W); picked=np.zeros(len(TREES),bool); remain=len(TREES)
-    totes_worker=np.zeros(W,int); km_worker=np.zeros(W)
-    bin_events=[[(0,"in_pos",0) ] for _ in range(n_bins)]
-    shift=END_MIN-START_MIN
-
-    def trees_per_tote(): return 1 if rng.normal(TREES_MEAN,TREES_SD)<1.5 else 2
-
-    while remain and np.isfinite(w_time).any():
-        w=int(np.nanargmin(w_time)); now=w_time[w]; fc=workers_face[w]; lst=face_to_idx[fc]
-        sel=[]
-        while lst and len(sel)<trees_per_tote():
-            ix=lst.pop(0)
-            if not picked[ix]: sel.append(ix)
-        if not sel: w_time[w]=np.inf; continue
-        for ix in sel: picked[ix]=True
-        remain-=len(sel)
-        p0=np.array(pos[w]); dist=np.linalg.norm(p0-TREES[sel[0]])
-        if len(sel)==2: dist+=np.linalg.norm(TREES[sel[1]]-TREES[sel[0]])
-        last=TREES[sel[-1]]
-        b=open_bin
-        if bin_start[b] and now-bin_start[b]>=BIN_TIME_LIMIT: b+=1
-        if b<n_bins and bin_load[b]>=BIN_CAP: b+=1
-        if b<n_bins and b!=open_bin: open_bin=b
-        if open_bin>=n_bins: w_time[w]=now+5; pos[w]=tuple(last); continue
-        dist+=np.linalg.norm(bins_xy[open_bin]-last)
-        if bin_start[open_bin] is None: bin_start[open_bin]=now
-        walk=dist/speed[w]; harv=fatigue(now,shift,rng); fin=now+walk+harv
-        w_time[w]=fin; pos[w]=tuple(bins_xy[open_bin])
-        km_worker[w]+=dist/1000; totes_worker[w]+=1
-        bin_load[open_bin]+=1
-        bin_events[open_bin].append((fin,"load",bin_load[open_bin]))
-        if bin_load[open_bin]==BIN_CAP:
-            bin_events[open_bin].append((fin,"full",BIN_CAP))
-    horas=(START_MIN+w_time[np.isfinite(w_time)].max()-START_MIN)/60
-    pick_df=pd.DataFrame({"Picker":np.arange(W),
-                          "Totes":totes_worker,
-                          "Km":km_worker,
-                          "Ingreso $":totes_worker*PRICE_TOTE})
-    bins_df=pd.DataFrame({"Bin":np.arange(n_bins),
-                          "Totes totales":bin_load})
-    return dict(horas=horas,
-                pickers=pick_df,
-                bins=bins_df,
-                bin_events=bin_events,
-                km_total=km_worker.sum(),
-                totes_total=totes_worker.sum())
-
-# ═════════════════ 3 · SIMULACIONES MULTI‑PP ═════════════════
-rng0=np.random.default_rng(SEED)
-res={lay:pd.DataFrame(index=PP_LIST,
-                      columns=["Trabajadores","Horas","Totes","Km","Costo $"])
-      for lay in LAYOUTS_ON}
-
-TOTAL_KG = len(TREES)*KG_TREE
-TOTAL_TOTES_EST = math.ceil(TOTAL_KG / KG_TOTE)
-BINS_NEEDED_THEO = math.ceil(TOTAL_TOTES_EST / BIN_CAP)
-BINS_KM = math.ceil(TOTAL_TOTES_EST / BIN_CAP)   # mismo cálculo teórico
-
-st.write(f"**Kg totales del huerto:** {TOTAL_KG:,.0f} kg  "
-         f"≙ {TOTAL_TOTES_EST:,d} totes  "
-         f"→ se necesitan ~{BINS_NEEDED_THEO} bines "
-         f"(cap. {BIN_CAP} totes c/u)")
-
-prog=st.progress(0.)
-for i,pp in enumerate(PP_LIST,1):
-    for lay in LAYOUTS_ON:
-        rng=np.random.default_rng(SEED)
-        bins_xy=np.array(BIN_SETS[lay],float)
-        if len(bins_xy)<BINS_NEEDED_THEO:
-            extra=BINS_NEEDED_THEO-len(bins_xy)
-            # añadimos "fantasmas" fuera del campo para que el modelo tenga bins
-            bins_xy=np.vstack([bins_xy,
-                               np.column_stack((np.full(extra,-10.),
-                                                np.linspace(0, max(TREES[:,1]), extra)))])
-        sim=run_sim(pp,bins_xy,rng)
-        cost=sim["pickers"]["Ingreso $"].sum()
-        res[lay].loc[pp]= (pp*len(ARBOLES_CARA)*2, sim["horas"],
-                           sim["totes_total"], sim["km_total"], cost)
-    prog.progress(i/len(PP_LIST))
-prog.empty()
+        centroids = new_centroids
+    return labels, centroids
 
 
-if USE_KMEDOIDS:
-    rng_bins = np.random.default_rng(SEED+123)
-    bins_custom = kmedoids_rows(TREES, BINS_KM, rng_bins)
-    BIN_SETS["kmedoids"] = bins_custom
-    if "kmedoids" not in LAYOUTS_ON:
-        LAYOUTS_ON.append("kmedoids")
+def plot_preview_kmeans(
+    XY: np.ndarray,
+    labels: np.ndarray,
+    centroids: np.ndarray,
+    dx: float,
+    row_width: float,
+    rows: int,
+    dy_tree: float,
+) -> plt.Figure:
+    """Return a Matplotlib figure with a K‑means preview."""
+    fig, ax = plt.subplots(figsize=(8, 4))
 
-# ═════════════════ 4 · TABLA Y GRÁFICAS GLOBAL ═════════════════
-st.subheader("Comparativa global")
-tabT,tabH,tabC=st.tabs(["Tabla","Horas","Costo $"])
-with tabT: st.dataframe(pd.concat(res,axis=1).style.format("{:.2f}"))
-with tabH:
-    fig,ax=plt.subplots(figsize=(7,4))
-    for lay,df in res.items():
-        ax.plot(df.index,df["Horas"],marker='o',label=lay)
-    if INVERT_X: ax.invert_xaxis()
-    ax.set_xlabel("Personas por cara"); ax.set_ylabel("Horas"); ax.legend(); ax.grid(alpha=.3); st.pyplot(fig)
-with tabC:
-    fig,ax=plt.subplots(figsize=(7,4))
-    for lay,df in res.items():
-        ax.plot(df.index,df["Costo $"],marker='s',label=lay)
-    if INVERT_X: ax.invert_xaxis()
-    ax.set_xlabel("Personas por cara"); ax.set_ylabel("Costo total ($)"); ax.legend(); ax.grid(alpha=.3); st.pyplot(fig)
+    # Row background blocks
+    for r in range(rows):
+        xc = r * dx
+        ax.add_patch(
+            patches.Rectangle(
+                (xc - row_width / 2, 0), row_width, XY[:, 1].max() + dy_tree if len(XY) else dy_tree,
+                fc="#f5f5f5", ec="none")
+        )
 
-# ═════════════════ 5 · DETALLE KG / BACKLOG ═════════════════
-st.subheader(f"Detalle – layout **{LAY_DET}**, {PP_DET} personas/cara")
+    # Scatter trees
+    k = centroids.shape[0]
+    for c in range(k):
+        pts = XY[labels == c]
+        if len(pts):
+            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"cluster {c+1}")
 
-rng_det=np.random.default_rng(SEED)
-bins_det=np.array(BIN_SETS[LAY_DET],float)
-if len(bins_det)<BINS_NEEDED_THEO:
-    extra=BINS_NEEDED_THEO-len(bins_det)
-    bins_det=np.vstack([bins_det,
-                        np.column_stack((np.full(extra,-10.),np.linspace(0,max(TREES[:,1]),extra)))])
-sim=run_sim(PP_DET,bins_det,rng_det)
+    # Centroids
+    if len(centroids):
+        ax.scatter(centroids[:, 0], centroids[:, 1], marker="X", s=130, c="red", ec="k", label="Centroides K‑means")
 
-colM,colKg=st.columns(2)
-with colM:
-    fig,ax=plt.subplots(figsize=(5,8))
-    ax.scatter(TREES[:,0],TREES[:,1],s=8,alpha=.25,label="Árboles")
-    ax.scatter(bins_det[:,0],bins_det[:,1],marker='s',s=120,color='tab:red',label="Bines")
-    for i,(x,y) in enumerate(bins_det): ax.text(x,y,f"{i}",ha='center',va='center',color='white',fontsize=8)
-    ax.set_aspect('equal'); ax.grid(alpha=.2); ax.legend()
-    ax.set_title("Mapa del huerto"); st.pyplot(fig)
+    ax.set_aspect("equal")
+    ax.set_title("Vista previa (K‑means)")
+    ax.set_xlabel("x (m)")
+    ax.set_ylabel("y (m)")
+    ax.legend(bbox_to_anchor=(1.02, 1.0), loc="upper left", borderaxespad=0)
+    plt.tight_layout(rect=[0, 0, 0.82, 1])
+    return fig
 
-with colKg:
-    st.dataframe(sim["bins"].style.format("{:.0f}"))
-    st.write(f"**Bines utilizados:** { (sim['bins']['Totes totales']>0).sum() } / {len(bins_det)}")
-    st.write(f"**Totes totales cosechados:** {sim['totes_total']:,d}  "
-             f"≙ {sim['totes_total']*KG_TOTE:,.0f} kg")
+# ────────────────────────────────────────────────────────────────
+# 0 · Utilities to load orchard‑block JSON files by team
+# ────────────────────────────────────────────────────────────────
 
-# Timeline KG
-st.markdown("### Timeline de kg por bin & kg restantes")
-fig,ax=plt.subplots(figsize=(9,4))
-kg_rest=TOTAL_KG
-t_prev=0
-for b,ev in enumerate(sim["bin_events"]):
-    t,kg=[0],[0]
-    for ti,typ,val in ev:
-        if typ in ("load","full"):
-            t.append(ti); kg.append(val*KG_TOTE)
-    ax.step(t,kg,where='post',label=f"Bin {b}")
-# kg restantes
-times_sorted=sorted({t for ev in sim["bin_events"] for t,typ,_ in ev})
-kg_remaining=[]
-for t in times_sorted:
-    totes_hasta=sum(val for ev in sim["bin_events"] for ti,typ,val in ev
-                    if typ in("load","full") and ti<=t)
-    kg_remaining.append(TOTAL_KG - totes_hasta*KG_TOTE)
-ax.step(times_sorted,kg_remaining,where='post',color='black',linewidth=2,label="Kg restantes (huerto)")
-ax.set_xlabel("Minutos desde inicio"); ax.set_ylabel("Kg"); ax.grid(alpha=.3); ax.legend(ncol=3,fontsize=8)
-fig.tight_layout(); st.pyplot(fig)
+def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
+    """Return mapping ``team_name → list_of_blocks``.
 
-# Pickers
-st.markdown("### Pickers – km & ingreso")
-st.dataframe(sim["pickers"].style.format({"Km":"{:.2f}","Ingreso $":"{:.2f}"}))
-fig,ax=plt.subplots(figsize=(7,4))
-ax.bar(sim["pickers"]["Picker"],sim["pickers"]["Km"])
-ax.set_xlabel("Picker"); ax.set_ylabel("Km"); ax.set_title("Km recorridos por picker"); st.pyplot(fig)
+    *Scans for files matching ``equipo*.json``.*
+    """
+    team_data: Dict[str, List[dict]] = {}
+    for path in Path(directory).glob("equipo*.json"):
+        try:
+            with open(path, "r", encoding="utf‑8") as fh:
+                data = json.load(fh)
+            blocks = data.get("ORCHARD_BLOCKS", [])
+            if isinstance(blocks, list):
+                team_data[path.stem] = blocks
+        except Exception as exc:  # pragma: no cover
+            # Save the error for later feedback
+            team_data[path.stem] = exc  # type: ignore[assignment]
+    return team_data
+
+
+def blocks_to_trees_per_face(block: dict) -> List[int]:
+    """Convert one block's *hileras* into the ``trees_per_face`` list."""
+    pairs = block.get("hileras", [])
+    if not pairs:
+        return []
+    max_row = max(row for row, _ in pairs)
+    tpf = [0] * max_row
+    for row, count in pairs:
+        if 1 <= row <= max_row:
+            tpf[row - 1] = count
+    return tpf
+
+
+# ────────────────────────────────────────────────────────────────
+# Helper · Compute XY coordinates from trees_per_face
+# ────────────────────────────────────────────────────────────────
+
+def orchard_xy(
+    trees_per_face: List[int],
+    dx_row: float,
+    dy_tree: float,
+    row_width: float,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return (XY, row_id, side_arr) for plotting / algorithms."""
+    rows = len(trees_per_face)
+    half_w = row_width / 2.0
+    trees: list[tuple[float, float, int, int]] = []
+    for r, n in enumerate(trees_per_face):
+        xc = r * dx_row
+        for side in (0, 1):  # 0‑west, 1‑east
+            x = xc + (-half_w if side == 0 else half_w)
+            for k in range(int(n)):
+                trees.append((x, k * dy_tree, r, side))
+    arr = np.asarray(trees, float)
+    return arr[:, :2], arr[:, 2].astype(int), arr[:, 3].astype(int)
+
+
+# ────────────────────────────────────────────────────────────────
+# Preview · K‑means clustering (Euclidean) for quick visual check
+# ────────────────────────────────────────────────────────────────
+
+def kmeans_preview(XY: np.ndarray, k: int, seed: int = 1) -> Tuple[np.ndarray, np.ndarray]:
+    """Return (labels, centroids) from a simple K‑means run."""
+    if _HAS_SKLEARN:
+        km = KMeans(n_clusters=k, n_init=5, random_state=seed).fit(XY)
+        return km.labels_, km.cluster_centers_
+
+    # Fallback lightweight implementation (Lloyd's algorithm)
+    rng = np.random.default_rng(seed)
+    centroids = XY[rng.choice(len(XY), size=k, replace=False)]
+    for _ in range(10):
+        # Assign
+        d2 = ((XY[:, None, :] - centroids[None, :, :]) ** 2).sum(axis=2)
+        labels = d2.argmin(axis=1)
+        # Update
+        new_centroids = np.vstack([XY[labels == c].mean(axis=0) for c in range(k)])
+        if np.allclose(new_centroids, centroids):
+            break
+        centroids = new_centroids
+    return labels, centroids
+
+
+def plot_preview_kmeans(
+    XY: np.ndarray,
+    labels: np.ndarray,
+    centroids: np.ndarray,
+    dx: float,
+    row_width: float,
+    rows: int,
+    dy_tree: float,
+) -> plt.Figure:
+    """Return a Matplotlib figure with a K‑means preview."""
+    fig, ax = plt.subplots(figsize=(8, 4))
+
+    # Row background blocks
+    for r in range(rows):
+        xc = r * dx
+        ax.add_patch(
+            patches.Rectangle((xc - row_width / 2, 0), row_width, XY[:, 1].max() + dy_tree, fc="#f5f5f5", ec="none")
+        )
+
+    # Scatter trees
+    k = centroids.shape[0]
+    for c in range(k):
+        pts = XY[labels == c]
+        if len(pts):
+            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"cluster {c+1}")
+
+    # Centroids
+    ax.scatter(centroids[:, 0], centroids[:, 1], marker="X", s=130, c="red", ec="k", label="Centroids")
+
+    ax.set_aspect("equal")
+    ax.set_title("Vista previa (K‑means)")
+    ax.set_xlabel("x (m)")
+    ax.set_ylabel("y (m)")
+    ax.legend(bbox_to_anchor=(1.02, 1.0), loc="upper left", borderaxespad=0)
+    plt.tight_layout(rect=[0, 0, 0.82, 1])
+    return fig
+
+
+# ────────────────────────────────────────────────────────────────
+# 1 · Core algorithm utilities (UNCHANGED from previous version)
+# ────────────────────────────────────────────────────────────────
+
+# ────────────────────────────────────────────────────────────────
+# 1 · Core algorithm utilities (mostly unchanged from original)
+# ────────────────────────────────────────────────────────────────
+
+def run_kmedoids(params):
+    """Run constrained k‑medoids and return rich results dict."""
+
+    # ↳ deterministic reproducibility
+    np.random.seed(params["seed"])
+    random.seed(params["seed"])
+
+    # Orchard geometry -----------------------------------------------------
+    rows        = len(params["trees_per_face"])
+    dx          = params["dx_row"]
+    dy          = params["dy_tree"]
+    w_row       = params["row_width"]
+    half_w      = w_row / 2.0
+
+    trees = []  # (x, y, row, side)
+    for r, n in enumerate(params["trees_per_face"]):
+        xc = r * dx
+        for side in (0, 1):                               # 0 = west, 1 = east
+            x = xc + (-half_w if side == 0 else half_w)
+            for k in range(n):
+                trees.append((x, k * dy, r, side))
+    trees = np.asarray(trees, float)
+
+    XY       = trees[:, :2]
+    row_id   = trees[:, 2].astype(int)
+    side_arr = trees[:, 3].astype(int)
+    N_tot    = len(trees)
+
+    ROW_TOP, ROW_BOT = (max(params["trees_per_face"]) - 1) * dy, 0.0
+
+    # Blocked distance helper ---------------------------------------------
+    def blocked_dist(i: int, j: int) -> float:
+        p, q = XY[i], XY[j]
+        rp, sp, rq, sq = row_id[i], side_arr[i], row_id[j], side_arr[j]
+        if rp == rq and sp == sq:
+            return np.linalg.norm(p - q)
+        d_down = (p[1] - ROW_BOT) + (q[1] - ROW_BOT) + abs(p[0] - q[0])
+        d_up   = (ROW_TOP - p[1]) + (ROW_TOP - q[1]) + abs(p[0] - q[0])
+        return d_down if d_down < d_up else d_up
+
+    # Pre‑compute distance matrix (symmetric) ------------------------------
+    D = np.zeros((N_tot, N_tot))
+    for i in range(N_tot):
+        for j in range(i + 1, N_tot):
+            d = blocked_dist(i, j)
+            D[i, j] = D[j, i] = d
+
+    # Capacity checks ------------------------------------------------------
+    k          = params["k_bins"]
+    min_cap    = params["N_target"] - params["slack"]
+    max_cap    = params["N_target"] + params["slack"]
+    if k * max_cap < N_tot:
+        raise ValueError(f"Capacidad insuficiente: {k}×{max_cap} < {N_tot} árboles. ")
+
+    # k‑medoids heuristic ---------------------------------------------------
+    def init_medoids():
+        med = [np.random.randint(N_tot)]
+        while len(med) < k:
+            dist2 = np.min(
+                [[np.linalg.norm(XY[i] - XY[m]) ** 2 for m in med] for i in range(N_tot)],
+                axis=1,
+            )
+            probs = dist2 / dist2.sum()
+            med.append(np.random.choice(N_tot, p=probs))
+        return med
+
+    def assign(points, medoids):
+        clusters, leftovers = [[] for _ in range(k)], []
+        # Order by difficulty (gap best–2nd best)
+        order = sorted(
+            points,
+            key=lambda i: np.sort([D[i, m] for m in medoids])[1]
+            - np.sort([D[i, m] for m in medoids])[0],
+            reverse=True,
+        )
+        for i in order:
+            for c, m in sorted(enumerate(medoids), key=lambda t: D[i, t[1]]):
+                if len(clusters[c]) < max_cap:
+                    clusters[c].append(i)
+                    break
+            else:
+                leftovers.append(i)
+        # Enforce minimum by stealing from the biggest cluster
+        for c in range(k):
+            while len(clusters[c]) < min_cap and leftovers:
+                donor = max(range(k), key=lambda x: len(clusters[x]))
+                if len(clusters[donor]) <= min_cap:
+                    break
+                victim = max(clusters[donor], key=lambda j: D[j, medoids[donor]])
+                clusters[donor].remove(victim)
+                clusters[c].append(victim)
+        return clusters, leftovers
+
+    def update_medoids(cl, med):
+        changed = False
+        for c, pts in enumerate(cl):
+            best = min(pts, key=lambda j: D[j, pts].sum())
+            if best != med[c]:
+                med[c] = best
+                changed = True
+        return changed
+
+    medoids = init_medoids()
+    for _ in range(12):
+        clusters, leftovers = assign(range(N_tot), medoids)
+        if not update_medoids(clusters, medoids):
+            break
+
+    # Assign any leftovers to the nearest bin (may exceed max_cap)
+    for i in leftovers:
+        best = min(range(k), key=lambda c: D[i, medoids[c]])
+        clusters[best].append(i)
+
+    bin_xy = XY[medoids]
+    total_dist = sum(D[i, medoids[c]] for c in range(k) for i in clusters[c])
+
+    point_cluster = np.empty(N_tot, int)
+    for c, pts in enumerate(clusters):
+        point_cluster[pts] = c
+
+    return {
+        "clusters": clusters,
+        "medoids": medoids,
+        "XY": XY,
+        "bin_xy": bin_xy,
+        "total_dist": total_dist,
+        "point_cluster": point_cluster,
+        "rows": rows,
+        "dx": dx,
+        "w_row": w_row,
+        "ROW_TOP": ROW_TOP,
+        "ROW_BOT": ROW_BOT,
+        "k": k,
+        "min_cap": min_cap,
+        "max_cap": max_cap,
+        "N_tot": N_tot,
+    }
+
+
+# ────────────────────────────────────────────────────────────────
+# 2 · Plotting helper
+# ────────────────────────────────────────────────────────────────
+
+def plot_orchard(
+    res: dict,
+    params: dict,
+    *,
+    sep_factor: float = 1.4,
+    fig_height_px: int = 600,
+    interactive: bool = True,
+):
+    """Visualise orchard clusters.
+
+    Parameters
+    ----------
+    res, params
+        Outputs from ``run_kmedoids`` and the parameter dict.
+    sep_factor
+        Multiplier applied to *x* spacing so that rows look farther
+        apart.  The underlying coordinates are scaled but the algorithm
+        results (distances etc.) remain unchanged.
+    fig_height_px
+        Pixel height for the *interactive* Plotly figure.
+    interactive
+        If *True*, return a **Plotly** figure (zoom/pan enabled).  If
+        *False*, return a static Matplotlib figure (old behaviour).
+    """
+
+    # ────────────────────────────────────────────────────────────────
+    # Common geometry
+    # ────────────────────────────────────────────────────────────────
+    XY, point_cluster, bin_xy = (
+        res["XY"].copy(),  # will re‑scale X below
+        res["point_cluster"],
+        res["bin_xy"].copy(),
+    )
+    rows, dx, w_row = res["rows"], res["dx"], res["w_row"]
+    ROW_TOP, ROW_BOT = res["ROW_TOP"], res["ROW_BOT"]
+    k = res["k"]
+
+    # Apply horizontal separation
+    XY[:, 0] *= sep_factor
+    bin_xy[:, 0] *= sep_factor
+    dx *= sep_factor
+    w_row *= sep_factor
+
+    # ────────────────────────────────────────────────────────────────
+    # Interactive Plotly branch
+    # ────────────────────────────────────────────────────────────────
+    if interactive:
+        fig = go.Figure()
+
+        # Row backgrounds as shapes
+        for r in range(rows):
+            xc = r * dx
+            fig.add_shape(
+                type="rect",
+                x0=xc - w_row / 2,
+                y0=0,
+                x1=xc + w_row / 2,
+                y1=ROW_TOP,
+                line=dict(color="rgba(0,0,0,0.4)", width=1),
+                fillcolor="rgba(200,200,200,0.25)",
+                layer="below",
+            )
+
+        # Scatter clusters
+        for c in range(k):
+            pts = XY[point_cluster == c]
+            if len(pts):
+                fig.add_trace(
+                    go.Scatter(
+                        x=pts[:, 0],
+                        y=pts[:, 1],
+                        mode="markers",
+                        marker=dict(size=4),
+                        name=f"Cluster {c+1}",
+                    )
+                )
+
+        # Scatter bins (medoids)
+        fig.add_trace(
+            go.Scatter(
+                x=bin_xy[:, 0],
+                y=bin_xy[:, 1],
+                mode="markers",
+                marker=dict(symbol="square", size=14, color="red", line=dict(width=1, color="black")),
+                name="Bins",
+            )
+        )
+
+        # Layout tweaks
+        fig.update_yaxes(scaleanchor="x", scaleratio=1)
+        fig.update_layout(
+            title=f"k‑medoids restringido  (k={k}, target {params['N_target']}±{params['slack']})",
+            xaxis_title="x (m)",
+            yaxis_title="y (m)",
+            height=fig_height_px,
+            legend=dict(x=1.02, y=1, xanchor="left"),
+            margin=dict(l=40, r=160, t=60, b=40),
+        )
+        return fig
+
+    # ────────────────────────────────────────────────────────────────
+    # Static Matplotlib branch (default)
+    # ────────────────────────────────────────────────────────────────
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    # Rows (shaded blocks)
+    for r in range(rows):
+        xc = r * dx
+        ax.add_patch(
+            patches.Rectangle(
+                (xc - w_row / 2, 0), w_row, ROW_TOP, fc="#dddddd", ec="k"
+            )
+        )
+
+    # Trees coloured by cluster
+    for c in range(k):
+        pts = XY[point_cluster == c]
+        ax.scatter(pts[:, 0], pts[:, 1], s=9, label=f"cluster {c + 1}")
+
+    # Bins (medoids)
+    ax.scatter(
+        bin_xy[:, 0],
+        bin_xy[:, 1],
+        marker="s",
+        s=130,
+        c="red",
+        ec="k",
+        lw=1.2,
+        label="Bins",
+    )
+
+    # Paths (down or up headlands)
+    for i in range(len(XY)):
+        b = bin_xy[point_cluster[i]]
+        p = XY[i]
+        d_down = (p[1] - ROW_BOT) + (b[1] - ROW_BOT) + abs(p[0] - b[0])
+        d_up = (ROW_TOP - p[1]) + (ROW_TOP - b[1]) + abs(p[0] - b[0])
+        path = [
+            (p[0], p[1]),
+            (p[0], ROW_BOT if d_down <= d_up else ROW_TOP),
+            (b[0], ROW_BOT if d_down <= d_up else ROW_TOP),
+            (b[0], b[1]),
+        ]
+        ax.plot(*zip(*path), lw=0.35, alpha=0.25, color="k")
+
+    ax.set_aspect("equal")
+    ax.set_xlim(-dx, (rows - 1) * dx + dx)
+    ax.set_ylim(-8, ROW_TOP + 5)
+    ax.set_xlabel("x (m)")
+    ax.set_ylabel("y (m)")
+    ax.set_title(
+        f"k‑medoids restringido  (k={k}, target {params['N_target']}±{params['slack']})"
+    )
+    ax.legend(
+        markerscale=1.3,
+        bbox_to_anchor=(1.02, 1),
+        loc="upper left",
+        borderaxespad=0,
+    )
+
+    plt.tight_layout(rect=[0, 0, 0.85, 1])
+    return fig
+
+# ────────────────────────────────────────────────────────────────
+
+# 3 · Streamlit UI
+
+# ────────────────────────────────────────────────────────────────
+
+
+def main() -> None:  # pragma: no cover
+    st.set_page_config(
+        page_title="Orchard k‑medoids allocator",
+        layout="wide",
+        page_icon="🌳",
+    )
+    st.title("🌳 Orchard k‑medoids bin allocator")
+
+    # -----------------------------------------------------------
+    # Sidebar · Equipo / Bloque selection
+    # -----------------------------------------------------------
+    st.sidebar.header("Fuente de datos")
+
+    team_files = load_team_files()
+    manual_option = "Entrada manual"
+    team_choices = [manual_option] + sorted([k for k, v in team_files.items() if not isinstance(v, Exception)])
+    equipo_sel = st.sidebar.selectbox("Equipo", team_choices)
+
+    trees_per_face_raw: List[int] | None = None
+    block_meta: dict[str, Any] | None = None
+    block_key: tuple[str, int] | None = None  # (equipo_sel, idx)
+
+    if equipo_sel == manual_option:
+        st.sidebar.subheader("Parámetro manual")
+        trees_str = st.sidebar.text_input("Trees per face (JSON list)", "[30, 30, 30]")
+        try:
+            trees_per_face_raw = json.loads(trees_str)
+            if not all(isinstance(x, (int, float)) for x in trees_per_face_raw):
+                raise ValueError
+        except Exception:
+            st.sidebar.error("Invalid JSON list. Example: [30, 30, 30]")
+            trees_per_face_raw = [30, 30, 30]
+    else:
+        blocks_or_err = team_files[equipo_sel]
+        if isinstance(blocks_or_err, Exception):
+            st.sidebar.error(f"Error leyendo {equipo_sel}.json → {blocks_or_err}")
+        elif not blocks_or_err:
+            st.sidebar.warning(f"{equipo_sel}.json no contiene bloques.")
+        else:
+            labels = [f"{i+1} · {b['variedad']} (sector {b['sector']})" for i, b in enumerate(blocks_or_err)]
+            idx = st.sidebar.selectbox("Bloque", range(len(labels)), format_func=lambda i: labels[i])
+            block_meta = blocks_or_err[idx]
+            trees_per_face_raw = blocks_to_trees_per_face(block_meta)
+            block_key = (equipo_sel, idx)
+            with st.sidebar.expander("Detalles bloque", expanded=False):
+                st.json({k: v for k, v in block_meta.items() if k != "hileras"})
+
+    # Persist row selection in session_state keyed by (equipo_sel, idx) or manual
+    if trees_per_face_raw is not None:
+        default_key = (equipo_sel, "manual") if block_key is None else block_key
+        # ─── Inicialización de la selección de hileras ───
+        if "row_select_key" not in st.session_state or st.session_state.row_select_key != default_key:
+            # Primera vez con este bloque → seleccionar todas
+            st.session_state.row_select_key = default_key
+            st.session_state.selected_rows = list(range(len(trees_per_face_raw)))
+
+
+        # -------------------------------------------------------
+        # Row selector below preview – within an expander & form
+        # -------------------------------------------------------
+        row_options = [f"Hilera {i+1} ({trees_per_face_raw[i]} árboles)" for i in range(len(trees_per_face_raw))]
+        with st.expander("Filtrar hileras", expanded=False):
+            with st.form("filter_rows_form"):
+                sel_rows = st.multiselect(
+                    "Seleccione hileras a incluir",
+                    options=list(range(len(row_options))),
+                    default=st.session_state.selected_rows,
+                    format_func=lambda idx: row_options[idx],
+                )
+                save_filter = st.form_submit_button("Guardar cambios")
+                if save_filter:
+                    if sel_rows:
+                        st.session_state.selected_rows = sel_rows
+                    else:
+                        st.warning("Debe seleccionar al menos una hilera.")
+
+    # Build filtered trees_per_face based on selection
+    trees_per_face: List[int] | None = None
+    if trees_per_face_raw is not None:
+        trees_per_face = [
+            trees_per_face_raw[i] if i in st.session_state.selected_rows else 0
+            for i in range(len(trees_per_face_raw))
+        ]
+
+    # -----------------------------------------------------------
+    # Sidebar · Remaining numeric parameters
+    # -----------------------------------------------------------
+    st.sidebar.header("Parámetros del algoritmo")
+    dx = st.sidebar.number_input("Row spacing dx (m)", value=4.0, min_value=0.1, step=0.1)
+    dy = st.sidebar.number_input("Tree spacing dy (m)", value=2.0, min_value=0.1, step=0.1)
+    row_width = st.sidebar.number_input("Row width (m)", value=1.0, min_value=0.1, step=0.1)
+    k_bins = st.sidebar.number_input("Number of bins (k)", value=5, min_value=1, step=1)
+    N_target = st.sidebar.number_input("Target trees per bin", value=32, min_value=1, step=1)
+    slack = st.sidebar.number_input("Slack (± trees)", value=10, min_value=0, step=1)
+    seed = st.sidebar.number_input("Random seed", value=1, min_value=0, step=1)
+    interactive_plot = st.sidebar.checkbox(
+        "Vista interactiva (zoom/pan)", value=False
+    )
+        # --- quick win ---  Validación inmediata de capacidad
+    if trees_per_face and any(trees_per_face):
+        max_total = int(k_bins) * (int(N_target) + int(slack))
+        total_trees = sum(trees_per_face)
+        if total_trees > max_total:
+            st.error(
+                f"Capacidad insuficiente: {max_total} < {total_trees} árboles.")
+    # -----------------------------------------------------------
+    # PREVIEW section (K‑means) – shows automatically when data present
+    # -----------------------------------------------------------
+    if trees_per_face and any(trees_per_face):
+        XY, row_id, side_arr = orchard_xy(trees_per_face, dx, dy, row_width)
+        if len(XY):
+            labels, centroids = kmeans_preview(XY, k=int(k_bins), seed=int(seed))
+            preview_fig = plot_preview_kmeans(XY, labels, centroids, dx, row_width, len(trees_per_face), dy)
+            st.subheader("Vista previa de hileras seleccionadas (K-means)")
+            st.plotly_chart(preview_fig, use_container_width=True)
+            st.caption("*Las hileras no seleccionadas se muestran vacías.*")
+    elif trees_per_face_raw is not None:
+        st.info("No hay hileras seleccionadas.")
+
+    # -----------------------------------------------------------
+    # Run button – executes constrained k‑medoids
+    # -----------------------------------------------------------
+    run_btn = st.sidebar.button("🚀 Ejecutar algoritmo k‑medoids")
+
+    if run_btn:
+        if trees_per_face is None or not any(trees_per_face):
+            st.error("Debe definir y seleccionar al menos una hilera antes de ejecutar el algoritmo.")
+            return
+
+        params = dict(
+            trees_per_face=trees_per_face,
+            dx_row=dx,
+            dy_tree=dy,
+            row_width=row_width,
+            k_bins=int(k_bins),
+            N_target=int(N_target),
+            slack=int(slack),
+            seed=int(seed),
+        )
+
+        with st.spinner("Computando k‑medoids …"):
+            try:
+                res = run_kmedoids(params)
+                import datetime, json, pathlib, uuid
+
+                run_id = datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+                run_entry = {
+                    "run_id": run_id,
+                    "params": params,
+                    "metrics": {
+                        "total_dist": res["total_dist"],
+                        "N_tot": res["N_tot"],
+                    },
+                }
+
+                # 1) guarda en la sesión
+                st.session_state["history"].append(run_entry)
+
+                # 2) botón de descarga inmediata
+                json_str = json.dumps(run_entry, indent=2)
+                st.download_button(
+                    "⬇️ Descargar este run",
+                    data=json_str,
+                    file_name=f"{run_id}.json",
+                )
+
+                # 3) (opcional) guarda en disco local
+                SAVE_DIR = pathlib.Path("runs")
+                if st.button("💾 Guardar en carpeta runs/"):
+                    SAVE_DIR.mkdir(exist_ok=True)
+                    (SAVE_DIR / f"{run_id}.json").write_text(json_str)
+                    st.toast(f"Run {run_id} guardado en {SAVE_DIR}/")
+                # ---------------------------------------------------------------
+            except ValueError as e:
+                st.error(str(e))
+                return
+
+        # -------------------------------------------------------
+        # Results summary
+        # -------------------------------------------------------
+        st.subheader("Resultados finales")
+        st.markdown(
+            f"**Distancia total caminada:** {res['total_dist']:.1f} m  "
+            f"**Total árboles:** {res['N_tot']}")
+        cols = st.columns(res["k"])
+        for c in range(res["k"]):
+            with cols[c]:
+                st.metric(
+                    label=f"Bin {c + 1}",
+                    value=f"{len(res['clusters'][c])} trees",
+                    delta=f"({res['min_cap']}–{res['max_cap']})",
+                )
+
+        # -------------------------------------------------------
+        # Plot – final allocation
+        # -------------------------------------------------------
+        fig = plot_orchard(res, params, interactive=interactive_plot)
+        
+        if interactive_plot:
+            st.plotly_chart(fig, use_container_width=True)   # Plotly (zoom, pan)
+        else:
+            st.pyplot(fig)                                   # Matplotlib clásico
+        import pandas as pd
+        import plotly.graph_objects as go
+        
+        if st.session_state["history"]:
+            st.subheader("Historial de ejecuciones (sesión actual)")
+        
+            # ▶️ Tabla interactiva
+            df = pd.json_normalize(st.session_state["history"])
+            st.dataframe(
+                df[["run_id", "params.k_bins", "metrics.total_dist"]],
+                use_container_width=True,
+            )
+        
+            # ▶️ Gráfico comparativo
+            fig_hist = go.Figure()
+            fig_hist.add_trace(
+                go.Scatter(
+                    x=df["params.k_bins"],
+                    y=df["metrics.total_dist"],
+                    mode="markers+lines",
+                    text=df["run_id"],
+                    name="Runs",
+                )
+            )
+            fig_hist.update_layout(
+                xaxis_title="k_bins",
+                yaxis_title="Distancia total (m)",
+                title="Distancia vs. k_bins",
+            )
+            st.plotly_chart(fig_hist, use_container_width=True)
+        
+# --- memoria de sesión para runs ---------------------------------
+if "history" not in st.session_state:
+    st.session_state["history"] = []        # lista de dicts por ejecución
+# -----------------------------------------------------------------
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()
