@@ -1,202 +1,275 @@
-# orchard_blocks_complete.py
-ORCHARD_BLOCKS = [
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "SANTINA COLT",
-        "equipo"          : 4,
-        "sector"          : "2",
-        "ceco"            : 10726,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            ( 1,  7), ( 2, 12), ( 3, 12), ( 4, 12), ( 5, 12), ( 6, 12),
-            ( 7, 12), ( 8, 12), ( 9, 12), (10, 12), (11, 12), (12, 12),
-            (13, 13), (14, 13), (15, 14), (16, 14), (17, 14), (18, 15),
-            (19, 17), (20, 22), (21, 38), (22, 40), (23, 40), (24, 40),
-            (25, 40), (26, 40), (27, 40), (28, 39), (29, 39), (30, 38),
-            (31, 38), (32, 37), (33, 36), (34, 36), (35, 36), (36, 36),
-            (37, 36), (38, 38), (39, 39), (40, 40), (41, 41), (42, 43),
-            (43, 44), (44, 46), (45, 47), (46, 63), (47, 76), (48, 76),
-            (49, 76), (50, 76), (51, 76), (52, 76), (53, 76), (54, 76),
-            (55, 76), (56, 76), (57, 76), (58, 76), (59, 76)
-        ],
-    },
+# -*- coding: utf-8 -*-
+import streamlit as st
 
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "SANTINA",
-        "equipo"          : 4,
-        "sector"          : "1 Y 2",
-        "ceco"            : 10726,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1, 58), (  2, 59), (  3, 60), (  4, 60), (  5, 61), (  6, 61),
-            (  7, 61), (  8, 61), (  9, 61), ( 10, 61), ( 11, 61), ( 12, 61),
-            ( 13, 61), ( 14, 61), ( 15, 61), ( 16, 61), ( 17, 61), ( 18, 61),
-            ( 19, 61), ( 20, 61), ( 21, 61), ( 22, 61), ( 23, 61), ( 24, 61),
-            ( 25, 59), ( 26, 57), ( 27, 54), ( 28, 51), ( 29, 45), ( 30, 42),
-            ( 31, 42), ( 32, 42), ( 33, 42), ( 34, 42), ( 35, 43), ( 36, 44),
-            ( 37, 45), ( 38, 45), ( 39, 46), ( 40, 47), ( 41, 47), ( 42, 48),
-            ( 43, 48), ( 44, 48), ( 45, 49), ( 46, 50), ( 47, 51), ( 48, 53),
-            ( 49, 57), ( 50, 61), ( 51, 64), ( 52, 69), ( 53, 73), ( 54, 79),
-            ( 55, 84), ( 56, 91),
-            *[(i, 96) for i in range(57, 113)]  # hileras 57‑112 con 96 plantas
-        ],
-    },
+# Configuración de la página
+st.set_page_config(
+    page_title="APP OPT HARVEST ORCHARD",
+    page_icon="🌳",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "LAPINS COLT",
-        "equipo"          : 4,
-        "sector"          : "1",
-        "ceco"            : 10325,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1, 11), (  2, 45), (  3, 53), (  4, 54), (  5, 53), (  6, 53),
-            (  7, 52), (  8, 51), (  9, 51), ( 10, 51), ( 11, 51), ( 12, 51),
-            ( 13, 51), ( 14, 51), ( 15, 51), ( 16, 51), ( 17, 51), ( 18, 51),
-            ( 19, 51), ( 20, 51), ( 21, 53), ( 22, 54), ( 23, 55), ( 24, 56),
-            ( 25, 57), ( 26, 58), ( 27, 58), ( 28, 59), ( 29, 59), ( 30, 59),
-            ( 31, 59), ( 32, 58), ( 33, 58), ( 34, 58), ( 35, 58), ( 36, 58),
-            ( 37, 58), ( 38, 58), ( 39, 58), ( 40, 58), ( 41, 58), ( 42, 58),
-            ( 43, 58), ( 44, 58), ( 45, 58), ( 46, 58), ( 47, 58), ( 48, 58),
-            ( 49, 57), ( 50, 57), ( 51, 57), ( 52, 57), ( 53, 57), ( 54, 57),
-            ( 55, 57), ( 56, 57), ( 57, 57), ( 58, 57), ( 59, 57), ( 60, 57),
-            ( 61, 74), ( 62, 74), ( 63, 75), ( 64, 75), ( 65, 75), ( 66, 76),
-            ( 67, 76), ( 68, 77), ( 69, 77), ( 70, 77), ( 71, 78), ( 72, 78),
-            ( 73, 78), ( 74, 78), ( 75, 78), ( 76, 79), ( 77, 79), ( 78, 79),
-            ( 79, 79), ( 80, 80), ( 81, 80), ( 82, 81), ( 83, 81), ( 84, 81),
-            ( 85, 82), ( 86, 82), ( 87, 83), ( 88, 83), ( 89, 83), ( 90, 84),
-            ( 91, 84), ( 92, 84), ( 93, 85), ( 94, 85), ( 95, 86), ( 96, 86),
-            ( 97, 86), ( 98, 87), ( 99, 87), (100, 88), (101, 88), (102, 85),
-            (103, 83), (104, 89), (105, 65), (106, 59), (107, 53), (108, 47),
-            (109, 41), (110, 35), (111, 33), (112, 27), (113, 24), (114, 19),
-            (115, 14), (116,  7)
-        ],
-    },
-
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "LAPINS COLT",
-        "equipo"          : 4,
-        "sector"          : "3",
-        "ceco"            : 10325,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1, 19), (  2, 26), (  3, 31), (  4, 38), (  5, 44), (  6, 51),
-            (  7, 57), (  8, 57), (  9, 58), ( 10, 58), ( 11, 59), ( 12, 59),
-            ( 13, 59), ( 14, 60), ( 15, 60), ( 16, 61), ( 17, 61), ( 18, 62),
-            ( 19, 62), ( 20, 63), ( 21, 63), ( 22, 63), ( 23, 64), ( 24, 64),
-            ( 25, 64), ( 26, 65), ( 27, 65), ( 28, 65), ( 29, 65), ( 30, 66),
-            ( 31, 66), ( 32, 66), ( 33, 66), ( 34, 66), ( 35, 66), ( 36, 66),
-            ( 37, 66), ( 38, 66), ( 39, 66), ( 40, 66), ( 41, 66), ( 42, 67),
-            ( 43, 67), ( 44, 67), ( 45, 68), ( 46, 68), ( 47, 69), ( 48, 69),
-            ( 49, 69), ( 50, 70), ( 51, 70), ( 52, 71), ( 53, 71), ( 54, 71),
-            ( 55, 72), ( 56, 72), ( 57, 72), ( 58, 73), ( 59, 73), ( 60, 74),
-            ( 61, 74), ( 62, 74), ( 63, 75), ( 64, 75), ( 65, 75), ( 66, 76),
-            ( 67, 76), ( 68, 77), ( 69, 77), ( 70, 77), ( 71, 78), ( 72, 78),
-            ( 73, 78), ( 74, 78), ( 75, 78), ( 76, 79), ( 77, 79), ( 78, 79),
-            ( 79, 79), ( 80, 80), ( 81, 80), ( 82, 81), ( 83, 81), ( 84, 81),
-            ( 85, 82), ( 86, 82), ( 87, 83), ( 88, 83), ( 89, 83), ( 90, 84),
-            ( 91, 84), ( 92, 84), ( 93, 85), ( 94, 85), ( 95, 86), ( 96, 86),
-            ( 97, 86), ( 98, 87), ( 99, 87), (100, 88), (101, 88), (102, 85),
-            (103, 83), (104, 89), (105, 65), (106, 59), (107, 53), (108, 47),
-            (109, 41), (110, 35), (111, 33), (112, 27)
-        ],
-    },
-
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "LAPINS COLT",
-        "equipo"          : 4,
-        "sector"          : "4",
-        "ceco"            : 10325,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1,  7), (  2, 11), (  3, 18), (  4, 20), (  5, 21), (  6, 22),
-            (  7, 23), (  8, 24), (  9, 24), ( 10, 24), ( 11, 25), ( 12, 25),
-            ( 13, 25), ( 14, 26), ( 15, 26), ( 16, 26), ( 17, 26), ( 18, 26),
-            ( 19, 26), ( 20, 26), ( 21, 27), ( 22, 28), ( 23, 33), ( 24, 39),
-            ( 25, 45), ( 26, 52), ( 27, 51), ( 28, 51), ( 29, 54), ( 30, 55),
-            ( 31, 56), ( 32, 57), ( 33, 59), ( 34, 60), ( 35, 61), ( 36, 63),
-            ( 37, 64), ( 38, 65), ( 39, 67), ( 40, 68), ( 41, 69), ( 42, 70),
-            ( 43, 71), ( 44, 72), ( 45, 72), ( 46, 73), ( 47, 73), ( 48, 74),
-            ( 49, 74), ( 50, 74), ( 51, 74), ( 52, 75), ( 53, 75), ( 54, 75),
-            ( 55, 75), ( 56, 75), ( 57, 75), ( 58, 75), ( 59, 75), ( 60, 75),
-            ( 61, 75), ( 62, 75), ( 63, 75)
-        ],
-    },
-
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "LAPINS COLT",
-        "equipo"          : 4,
-        "sector"          : "4",
-        "ceco"            : 10325,
-        "anio_plantacion" : 2015,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1, 11), (  2, 22), (  3, 23), (  4, 23), (  5, 24), (  6, 25),
-            (  7, 26), (  8, 26), (  9, 27), ( 10, 28), ( 11, 29), ( 12, 29),
-            ( 13, 30), ( 14, 31), ( 15, 33), ( 16, 34), ( 17, 35), ( 18, 37),
-            ( 19, 38), ( 20, 40), ( 21, 41), ( 22, 43), ( 23, 45), ( 24, 46),
-            ( 25, 47), ( 26, 50), ( 27, 51), ( 28, 51), ( 29, 54), ( 30, 55),
-            ( 31, 56), ( 32, 57), ( 33, 59), ( 34, 60), ( 35, 61), ( 36, 63),
-            ( 37, 64), ( 38, 65), ( 39, 67), ( 40, 68), ( 41, 69), ( 42, 70),
-            ( 43, 71), ( 44, 72), ( 45, 72), ( 46, 73), ( 47, 73), ( 48, 74),
-            ( 49, 74), ( 50, 74), ( 51, 74), ( 52, 75), ( 53, 75), ( 54, 75),
-            ( 55, 75), ( 56, 75), ( 57, 75), ( 58, 75), ( 59, 75), ( 60, 75)
-        ],
-    },
-
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "SANTINA G-12",
-        "equipo"          : 4,
-        "sector"          : "5 SUR",
-        "ceco"            : 11709,
-        "anio_plantacion" : 2017,
-        "formacion"       : "V",
-        "hileras" : [
-            ( 1, 22), ( 2, 22), ( 3, 23), ( 4, 23), ( 5, 24), ( 6, 25),
-            ( 7, 26), ( 8, 26), ( 9, 27), (10, 28), (11, 29), (12, 29),
-            (13, 30), (14, 31), (15, 33), (16, 34), (17, 35), (18, 37),
-            (19, 38), (20, 40), (21, 41), (22, 43), (23, 45), (24, 46),
-            (25, 47), (26, 50), (27, 51), (28, 51), (29, 54), (30, 55),
-            (31, 56), (32, 57), (33, 59), (34, 60), (35, 61), (36, 63),
-            (37, 64), (38, 65), (39, 67), (40, 68), (41, 69), (42, 70),
-            (43, 71), (44, 72), (45, 72), (46, 73), (47, 73), (48, 74),
-            (49, 74), (50, 74), (51, 74), (52, 75), (53, 75), (54, 75),
-            (55, 75), (56, 75)
-        ],
-    },
-
-    # ─────────────────────────────────────────────────────────────
-    {
-        "variedad"        : "SANTINA G-12",
-        "equipo"          : 4,
-        "sector"          : "5 NORTE",
-        "ceco"            : 11709,
-        "anio_plantacion" : 2017,
-        "formacion"       : "V",
-        "hileras" : [
-            (  1, 29), (  2, 52), (  3, 54), (  4, 54), (  5, 54), (  6, 54),
-            (  7, 54), (  8, 55), (  9, 55), ( 10, 55), ( 11, 55), ( 12, 55),
-            ( 13, 55), ( 14, 55), ( 15, 55), ( 16, 55), ( 17, 56), ( 18, 56),
-            ( 19, 56), ( 20, 56), ( 21, 56), ( 22, 56), ( 23, 56), ( 24, 56),
-            ( 25, 56), ( 26, 56), ( 27, 56), ( 28, 56), ( 29, 56), ( 30, 57),
-            ( 31, 57), ( 32, 57), ( 33, 57), ( 34, 57), ( 35, 57), ( 36, 57),
-            ( 37, 58), ( 38, 58), ( 39, 58), ( 40, 58), ( 41, 58), ( 42, 58),
-            ( 43, 58), ( 44, 58), ( 45, 58), ( 46, 59), ( 47, 59), ( 48, 59),
-            ( 49, 59), ( 50, 59), ( 51, 59), ( 52, 59), ( 53, 59), ( 54, 59),
-            ( 55, 59), ( 56, 59), ( 57, 60), ( 58, 60), ( 59, 60), ( 60, 60),
-            ( 61, 60), ( 62, 60), ( 63, 60), ( 64, 60), ( 65, 60), ( 66, 61),
-            ( 67, 61), ( 68, 61), ( 69, 61), ( 70, 61), ( 71, 61), ( 72, 61),
-            ( 73, 61)
-        ],
+# Estilo personalizado
+st.markdown("""
+    <style>
+    .main-header {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #2E7D32;
+        text-align: center;
+        margin-bottom: 1rem;
     }
-]
+    .sub-header {
+        font-size: 1.5rem;
+        color: #558B2F;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .feature-box {
+        background-color: #F1F8E9;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 5px solid #4CAF50;
+        margin-bottom: 1rem;
+    }
+    .info-box {
+        background-color: #E8F5E9;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Header
+st.markdown('<div class="main-header">🌳 APP OPT HARVEST ORCHARD</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Sistema de Optimización de Cosecha en Huertos</div>', unsafe_allow_html=True)
+
+# Imagen o logo (si existe)
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.markdown("---")
+
+# Introducción
+st.markdown("""
+## 👋 Bienvenido al Sistema de Optimización de Cosecha
+
+Esta aplicación web permite **optimizar la logística de cosecha en campos frutales** mediante algoritmos
+avanzados de optimización y visualización interactiva.
+
+### 🎯 Objetivo Principal
+
+Reducir significativamente la distancia que recorren los cosecheros mediante la **ubicación óptima de bines**,
+transformando la energía gastada en caminar en más totes cosechados por persona.
+""")
+
+st.markdown("---")
+
+# Características principales
+st.markdown("## ✨ Características Principales")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+    <div class="feature-box">
+        <h3>🎯 Optimización Automática</h3>
+        <p>Cálculo de posiciones óptimas de bines basado en:</p>
+        <ul>
+            <li>Capacidad de bines</li>
+            <li>Producción estimada por árbol</li>
+            <li>Estructura del huerto</li>
+            <li>Tipo de cosecha (floreo, barrer, temporada)</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="feature-box">
+        <h3>📊 Visualización Interactiva</h3>
+        <p>Gráficos claros y detallados de:</p>
+        <ul>
+            <li>Distribución de hileras y árboles</li>
+            <li>Ubicación de bines</li>
+            <li>Pasillos horizontales óptimos</li>
+            <li>Configuraciones para múltiples escenarios</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class="feature-box">
+        <h3>📄 Generación de Documentos</h3>
+        <p>Exportación de resultados en múltiples formatos:</p>
+        <ul>
+            <li>Mapas de ubicación (.txt)</li>
+            <li>Documentos LaTeX para impresión</li>
+            <li>Visualizaciones en alta resolución</li>
+            <li>Reportes detallados</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="feature-box">
+        <h3>🗺️ Análisis de Parcelas</h3>
+        <p>Herramientas avanzadas para:</p>
+        <ul>
+            <li>Importación de archivos KML</li>
+            <li>Visualización geoespacial</li>
+            <li>Cálculo de áreas y distancias</li>
+            <li>Análisis de configuraciones</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+# Cómo usar
+st.markdown("## 🚀 Cómo Usar la Aplicación")
+
+st.markdown("""
+<div class="info-box">
+    <h4>1️⃣ Navegar por las páginas</h4>
+    <p>Utiliza el menú lateral (👈) para acceder a los diferentes módulos de la aplicación.</p>
+</div>
+
+<div class="info-box">
+    <h4>2️⃣ Configurar parámetros</h4>
+    <p>Ingresa los datos de tu campo: hileras, árboles, separaciones y estimaciones de producción.</p>
+</div>
+
+<div class="info-box">
+    <h4>3️⃣ Generar optimización</h4>
+    <p>El sistema calculará automáticamente la configuración óptima para tu campo.</p>
+</div>
+
+<div class="info-box">
+    <h4>4️⃣ Visualizar resultados</h4>
+    <p>Explora los gráficos interactivos y las recomendaciones generadas.</p>
+</div>
+
+<div class="info-box">
+    <h4>5️⃣ Exportar documentos</h4>
+    <p>Descarga los mapas y configuraciones para uso en campo.</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+# Módulos disponibles
+st.markdown("## 📚 Módulos Disponibles")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+    ### 📝 Automatización Lihueimo
+    Sistema completo de optimización específico para el campo Lihueimo.
+    Incluye generación de mapas, cálculo de pasillos y exportación de documentos.
+    """)
+
+with col2:
+    st.markdown("""
+    ### 🔧 Optimizaciones v2-v11
+    Diferentes versiones del motor de optimización con características
+    específicas y mejoras incrementales.
+    """)
+
+with col3:
+    st.markdown("""
+    ### 📊 Visualización
+    Herramientas avanzadas de análisis visual, importación de KML
+    y visualización geoespacial.
+    """)
+
+st.markdown("---")
+
+# Información técnica
+st.markdown("## 🛠️ Tecnologías Utilizadas")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.markdown("""
+    **Frontend**
+    - Streamlit
+    - Matplotlib
+    - Plotly
+    """)
+
+with col2:
+    st.markdown("""
+    **Algoritmos**
+    - K-means
+    - K-medoids
+    - Optimización
+    """)
+
+with col3:
+    st.markdown("""
+    **Procesamiento**
+    - NumPy
+    - Pandas
+    - SciPy
+    """)
+
+with col4:
+    st.markdown("""
+    **Formatos**
+    - KML/GeoJSON
+    - LaTeX
+    - TXT/JSON
+    """)
+
+st.markdown("---")
+
+# Footer
+st.markdown("""
+## 📞 Información Adicional
+
+Para más detalles sobre el proyecto, consulta el archivo `README.md` en el repositorio.
+
+### 📈 Beneficios Esperados
+
+- ⏱️ **Reducción de tiempos**: Menos distancia recorrida por los cosecheros
+- 📦 **Mayor eficiencia**: Más totes cosechados por persona
+- 💰 **Ahorro de costos**: Optimización de recursos humanos
+- 📊 **Mejor planificación**: Decisiones basadas en datos
+
+---
+
+<div style="text-align: center; color: #666;">
+    <p><b>Sistema desarrollado por Equipo Garcés</b></p>
+    <p>Versión 1.0.0 | Noviembre 2025</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Sidebar info
+with st.sidebar:
+    st.markdown("---")
+    st.markdown("### 📌 Navegación Rápida")
+    st.markdown("""
+    Selecciona una página del menú superior para comenzar:
+
+    - **Automatización Lihueimo**: Optimización completa
+    - **Optimización v2-v11**: Diferentes versiones
+    - **Visualización**: Análisis visual
+    """)
+
+    st.markdown("---")
+    st.markdown("### ℹ️ Ayuda")
+    st.markdown("""
+    Si necesitas ayuda:
+    1. Revisa el README.md
+    2. Consulta la documentación
+    3. Contacta al equipo de soporte
+    """)
+
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; font-size: 0.8rem; color: #666;">
+        Made with ❤️ using Streamlit
+    </div>
+    """, unsafe_allow_html=True)

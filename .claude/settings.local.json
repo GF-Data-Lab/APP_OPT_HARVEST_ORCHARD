@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(streamlit run:*)",
+      "Bash(timeout 2 sleep:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
