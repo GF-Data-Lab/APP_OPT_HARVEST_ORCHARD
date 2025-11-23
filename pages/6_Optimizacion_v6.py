@@ -22,13 +22,13 @@ facilitar futuras revisiones.
 import json
 import random
 from pathlib import Path
-from typing import Dict, List, Any, Tuple
+from typing import Any, Dict, List, Tuple
 
-import numpy as np
-import streamlit as st
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import numpy as np
 import plotly.graph_objects as go
+import streamlit as st
+from matplotlib import patches
 
 # Try to import scikit‑learn for KMeans preview; otherwise use fallback
 try:
@@ -51,7 +51,7 @@ def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
     team_data: Dict[str, List[dict]] = {}
     for path in Path(directory).glob("equipo*.json"):
         try:
-            with open(path, "r", encoding="utf‑8") as fh:
+            with open(path, encoding="utf‑8") as fh:
                 data = json.load(fh)
             blocks = data.get("ORCHARD_BLOCKS", [])
             if isinstance(blocks, list):
@@ -148,7 +148,7 @@ def plot_preview_kmeans(
                 XY[:, 1].max() + dy_tree if len(XY) else dy_tree,
                 fc="#f5f5f5",
                 ec="none",
-            )
+            ),
         )
 
     # Scatter trees
@@ -156,7 +156,7 @@ def plot_preview_kmeans(
     for c in range(k):
         pts = XY[labels == c]
         if len(pts):
-            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"Grupo {c+1}")  # ‑‑‑ quick win ‑‑‑
+            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"Grupo {c + 1}")  # ‑‑‑ quick win ‑‑‑
 
     # Centroids
     if len(centroids):
@@ -186,6 +186,7 @@ def plot_preview_kmeans(
 # 0 · Utilities to load orchard‑block JSON files by team
 # ────────────────────────────────────────────────────────────────
 
+
 def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
     """Return mapping ``team_name → list_of_blocks``.
 
@@ -194,7 +195,7 @@ def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
     team_data: Dict[str, List[dict]] = {}
     for path in Path(directory).glob("equipo*.json"):
         try:
-            with open(path, "r", encoding="utf‑8") as fh:
+            with open(path, encoding="utf‑8") as fh:
                 data = json.load(fh)
             blocks = data.get("ORCHARD_BLOCKS", [])
             if isinstance(blocks, list):
@@ -222,6 +223,7 @@ def blocks_to_trees_per_face(block: dict) -> List[int]:
 # Helper · Compute XY coordinates from trees_per_face
 # ────────────────────────────────────────────────────────────────
 
+
 def orchard_xy(
     trees_per_face: List[int],
     dx_row: float,
@@ -245,6 +247,7 @@ def orchard_xy(
 # ────────────────────────────────────────────────────────────────
 # Preview · K‑means clustering (Euclidean) for quick visual check
 # ────────────────────────────────────────────────────────────────
+
 
 def kmeans_preview(XY: np.ndarray, k: int, seed: int = 1) -> Tuple[np.ndarray, np.ndarray]:
     """Return (labels, centroids) from a simple K‑means run."""
@@ -283,7 +286,13 @@ def plot_preview_kmeans(
     for r in range(rows):
         xc = r * dx
         ax.add_patch(
-            patches.Rectangle((xc - row_width / 2, 0), row_width, XY[:, 1].max() + dy_tree, fc="#f5f5f5", ec="none")
+            patches.Rectangle(
+                (xc - row_width / 2, 0),
+                row_width,
+                XY[:, 1].max() + dy_tree,
+                fc="#f5f5f5",
+                ec="none",
+            ),
         )
 
     # Scatter trees
@@ -291,10 +300,18 @@ def plot_preview_kmeans(
     for c in range(k):
         pts = XY[labels == c]
         if len(pts):
-            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"cluster {c+1}")
+            ax.scatter(pts[:, 0], pts[:, 1], s=6, label=f"cluster {c + 1}")
 
     # Centroids
-    ax.scatter(centroids[:, 0], centroids[:, 1], marker="X", s=130, c="red", ec="k", label="Centroids")
+    ax.scatter(
+        centroids[:, 0],
+        centroids[:, 1],
+        marker="X",
+        s=130,
+        c="red",
+        ec="k",
+        label="Centroids",
+    )
 
     ax.set_aspect("equal")
     ax.set_title("Vista previa (K‑means)")
@@ -313,33 +330,33 @@ def plot_preview_kmeans(
 # 1 · Core algorithm utilities (mostly unchanged from original)
 # ────────────────────────────────────────────────────────────────
 
+
 def run_kmedoids(params):
     """Run constrained k‑medoids and return rich results dict."""
-
     # ↳ deterministic reproducibility
     np.random.seed(params["seed"])
     random.seed(params["seed"])
 
     # Orchard geometry -----------------------------------------------------
-    rows        = len(params["trees_per_face"])
-    dx          = params["dx_row"]
-    dy          = params["dy_tree"]
-    w_row       = params["row_width"]
-    half_w      = w_row / 2.0
+    rows = len(params["trees_per_face"])
+    dx = params["dx_row"]
+    dy = params["dy_tree"]
+    w_row = params["row_width"]
+    half_w = w_row / 2.0
 
     trees = []  # (x, y, row, side)
     for r, n in enumerate(params["trees_per_face"]):
         xc = r * dx
-        for side in (0, 1):                               # 0 = west, 1 = east
+        for side in (0, 1):  # 0 = west, 1 = east
             x = xc + (-half_w if side == 0 else half_w)
             for k in range(n):
                 trees.append((x, k * dy, r, side))
     trees = np.asarray(trees, float)
 
-    XY       = trees[:, :2]
-    row_id   = trees[:, 2].astype(int)
+    XY = trees[:, :2]
+    row_id = trees[:, 2].astype(int)
     side_arr = trees[:, 3].astype(int)
-    N_tot    = len(trees)
+    N_tot = len(trees)
 
     ROW_TOP, ROW_BOT = (max(params["trees_per_face"]) - 1) * dy, 0.0
 
@@ -350,8 +367,8 @@ def run_kmedoids(params):
         if rp == rq and sp == sq:
             return np.linalg.norm(p - q)
         d_down = (p[1] - ROW_BOT) + (q[1] - ROW_BOT) + abs(p[0] - q[0])
-        d_up   = (ROW_TOP - p[1]) + (ROW_TOP - q[1]) + abs(p[0] - q[0])
-        return d_down if d_down < d_up else d_up
+        d_up = (ROW_TOP - p[1]) + (ROW_TOP - q[1]) + abs(p[0] - q[0])
+        return min(d_up, d_down)
 
     # Pre‑compute distance matrix (symmetric) ------------------------------
     D = np.zeros((N_tot, N_tot))
@@ -361,9 +378,9 @@ def run_kmedoids(params):
             D[i, j] = D[j, i] = d
 
     # Capacity checks ------------------------------------------------------
-    k          = params["k_bins"]
-    min_cap    = params["N_target"] - params["slack"]
-    max_cap    = params["N_target"] + params["slack"]
+    k = params["k_bins"]
+    min_cap = params["N_target"] - params["slack"]
+    max_cap = params["N_target"] + params["slack"]
     if k * max_cap < N_tot:
         raise ValueError(f"Capacidad insuficiente: {k}×{max_cap} < {N_tot} árboles. ")
 
@@ -456,6 +473,7 @@ def run_kmedoids(params):
 # 2 · Plotting helper
 # ────────────────────────────────────────────────────────────────
 
+
 def plot_orchard(
     res: dict,
     params: dict,
@@ -479,8 +497,8 @@ def plot_orchard(
     interactive
         If *True*, return a **Plotly** figure (zoom/pan enabled).  If
         *False*, return a static Matplotlib figure (old behaviour).
-    """
 
+    """
     # ────────────────────────────────────────────────────────────────
     # Common geometry
     # ────────────────────────────────────────────────────────────────
@@ -529,8 +547,8 @@ def plot_orchard(
                         y=pts[:, 1],
                         mode="markers",
                         marker=dict(size=4),
-                        name=f"Cluster {c+1}",
-                    )
+                        name=f"Cluster {c + 1}",
+                    ),
                 )
 
         # Scatter bins (medoids)
@@ -539,9 +557,14 @@ def plot_orchard(
                 x=bin_xy[:, 0],
                 y=bin_xy[:, 1],
                 mode="markers",
-                marker=dict(symbol="square", size=14, color="red", line=dict(width=1, color="black")),
+                marker=dict(
+                    symbol="square",
+                    size=14,
+                    color="red",
+                    line=dict(width=1, color="black"),
+                ),
                 name="Bins",
-            )
+            ),
         )
 
         # Layout tweaks
@@ -564,11 +587,7 @@ def plot_orchard(
     # Rows (shaded blocks)
     for r in range(rows):
         xc = r * dx
-        ax.add_patch(
-            patches.Rectangle(
-                (xc - w_row / 2, 0), w_row, ROW_TOP, fc="#dddddd", ec="k"
-            )
-        )
+        ax.add_patch(patches.Rectangle((xc - w_row / 2, 0), w_row, ROW_TOP, fc="#dddddd", ec="k"))
 
     # Trees coloured by cluster
     for c in range(k):
@@ -606,9 +625,7 @@ def plot_orchard(
     ax.set_ylim(-8, ROW_TOP + 5)
     ax.set_xlabel("x (m)")
     ax.set_ylabel("y (m)")
-    ax.set_title(
-        f"k‑medoids restringido  (k={k}, target {params['N_target']}±{params['slack']})"
-    )
+    ax.set_title(f"k‑medoids restringido  (k={k}, target {params['N_target']}±{params['slack']})")
     ax.legend(
         markerscale=1.3,
         bbox_to_anchor=(1.02, 1),
@@ -623,6 +640,7 @@ def plot_orchard(
 # ────────────────────────────────────────────────────────────────
 # 3 · Streamlit UI con quick wins
 # ────────────────────────────────────────────────────────────────
+
 
 def main() -> None:  # pragma: no cover
     st.set_page_config(
@@ -641,7 +659,7 @@ def main() -> None:  # pragma: no cover
 
         manual_option = "Entrada manual"
         team_choices = [manual_option] + sorted(
-            [k for k, v in team_files.items() if not isinstance(v, Exception)]
+            [k for k, v in team_files.items() if not isinstance(v, Exception)],
         )
         equipo_sel = st.selectbox("Equipo", team_choices)
 
@@ -667,7 +685,7 @@ def main() -> None:  # pragma: no cover
                 st.warning(f"{equipo_sel}.json no contiene bloques.")
             else:
                 labels = [
-                    f"{i+1} · {b['variedad']} (sector {b['sector']})"
+                    f"{i + 1} · {b['variedad']} (sector {b['sector']})"
                     for i, b in enumerate(blocks_or_err)
                 ]
                 idx = st.selectbox("Bloque", range(len(labels)), format_func=lambda i: labels[i])
@@ -689,14 +707,14 @@ def main() -> None:  # pragma: no cover
 
             # Row selector form
             row_options = [
-                f"Hilera {i+1} ({trees_per_face_raw[i]} árboles)"
+                f"Hilera {i + 1} ({trees_per_face_raw[i]} árboles)"
                 for i in range(len(trees_per_face_raw))
             ]
             with st.expander("Filtrar hileras", expanded=False):
                 with st.form("filter_rows_form"):
                     sel_rows = st.multiselect(
                         "Seleccione hileras a incluir",
-                        options=list(range(len(row_options)) ),
+                        options=list(range(len(row_options))),
                         default=st.session_state.selected_rows,
                         format_func=lambda idx: row_options[idx],
                     )
@@ -733,8 +751,7 @@ def main() -> None:  # pragma: no cover
             max_total = int(k_bins) * (int(N_target) + int(slack))
             total_trees = sum(trees_per_face)
             if total_trees > max_total:
-                st.error(
-                    f"Capacidad insuficiente: {max_total} < {total_trees} árboles.")
+                st.error(f"Capacidad insuficiente: {max_total} < {total_trees} árboles.")
 
         # Botón principal destacado
         run_btn = st.button("🚀 Ejecutar algoritmo k‑medoids", type="primary")  # ‑‑‑ quick win ‑‑‑
@@ -747,7 +764,13 @@ def main() -> None:  # pragma: no cover
         if len(XY):
             labels, centroids = kmeans_preview(XY, k=int(k_bins), seed=int(seed))
             preview_fig = plot_preview_kmeans(
-                XY, labels, centroids, dx, row_width, len(trees_per_face), dy
+                XY,
+                labels,
+                centroids,
+                dx,
+                row_width,
+                len(trees_per_face),
+                dy,
             )
             st.subheader("Vista previa de hileras seleccionadas (K‑means)")
             st.pyplot(preview_fig)

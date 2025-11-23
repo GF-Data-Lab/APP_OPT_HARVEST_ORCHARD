@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import streamlit as st
 
 # Configuración de la página
@@ -6,11 +5,12 @@ st.set_page_config(
     page_title="APP OPT HARVEST ORCHARD",
     page_icon="🌳",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 # Estilo personalizado
-st.markdown("""
+st.markdown(
+    """
     <style>
     .main-header {
         font-size: 3rem;
@@ -39,11 +39,16 @@ st.markdown("""
         margin: 1rem 0;
     }
     </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Header
 st.markdown('<div class="main-header">🌳 APP OPT HARVEST ORCHARD</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Sistema de Optimización de Cosecha en Huertos</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="sub-header">Sistema de Optimización de Cosecha en Huertos</div>',
+    unsafe_allow_html=True,
+)
 
 # Imagen o logo (si existe)
 col1, col2, col3 = st.columns([1, 2, 1])
@@ -51,7 +56,8 @@ with col2:
     st.markdown("---")
 
 # Introducción
-st.markdown("""
+st.markdown(
+    """
 ## 👋 Bienvenido al Sistema de Optimización de Cosecha
 
 Esta aplicación web permite **optimizar la logística de cosecha en campos frutales** mediante algoritmos
@@ -61,7 +67,8 @@ avanzados de optimización y visualización interactiva.
 
 Reducir significativamente la distancia que recorren los cosecheros mediante la **ubicación óptima de bines**,
 transformando la energía gastada en caminar en más totes cosechados por persona.
-""")
+"""
+)
 
 st.markdown("---")
 
@@ -71,7 +78,8 @@ st.markdown("## ✨ Características Principales")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("""
+    st.markdown(
+        """
     <div class="feature-box">
         <h3>🎯 Optimización Automática</h3>
         <p>Cálculo de posiciones óptimas de bines basado en:</p>
@@ -82,9 +90,12 @@ with col1:
             <li>Tipo de cosecha (floreo, barrer, temporada)</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
-    st.markdown("""
+    st.markdown(
+        """
     <div class="feature-box">
         <h3>📊 Visualización Interactiva</h3>
         <p>Gráficos claros y detallados de:</p>
@@ -95,10 +106,13 @@ with col1:
             <li>Configuraciones para múltiples escenarios</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 with col2:
-    st.markdown("""
+    st.markdown(
+        """
     <div class="feature-box">
         <h3>📄 Generación de Documentos</h3>
         <p>Exportación de resultados en múltiples formatos:</p>
@@ -109,9 +123,12 @@ with col2:
             <li>Reportes detallados</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
-    st.markdown("""
+    st.markdown(
+        """
     <div class="feature-box">
         <h3>🗺️ Análisis de Parcelas</h3>
         <p>Herramientas avanzadas para:</p>
@@ -122,14 +139,17 @@ with col2:
             <li>Análisis de configuraciones</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 st.markdown("---")
 
 # Cómo usar
 st.markdown("## 🚀 Cómo Usar la Aplicación")
 
-st.markdown("""
+st.markdown(
+    """
 <div class="info-box">
     <h4>1️⃣ Navegar por las páginas</h4>
     <p>Utiliza el menú lateral (👈) para acceder a los diferentes módulos de la aplicación.</p>
@@ -154,7 +174,9 @@ st.markdown("""
     <h4>5️⃣ Exportar documentos</h4>
     <p>Descarga los mapas y configuraciones para uso en campo.</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 
@@ -164,25 +186,31 @@ st.markdown("## 📚 Módulos Disponibles")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("""
+    st.markdown(
+        """
     ### 📝 Automatización Lihueimo
     Sistema completo de optimización específico para el campo Lihueimo.
     Incluye generación de mapas, cálculo de pasillos y exportación de documentos.
-    """)
+    """
+    )
 
 with col2:
-    st.markdown("""
+    st.markdown(
+        """
     ### 🔧 Optimizaciones v2-v11
     Diferentes versiones del motor de optimización con características
     específicas y mejoras incrementales.
-    """)
+    """
+    )
 
 with col3:
-    st.markdown("""
+    st.markdown(
+        """
     ### 📊 Visualización
     Herramientas avanzadas de análisis visual, importación de KML
     y visualización geoespacial.
-    """)
+    """
+    )
 
 st.markdown("---")
 
@@ -192,41 +220,50 @@ st.markdown("## 🛠️ Tecnologías Utilizadas")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.markdown("""
+    st.markdown(
+        """
     **Frontend**
     - Streamlit
     - Matplotlib
     - Plotly
-    """)
+    """
+    )
 
 with col2:
-    st.markdown("""
+    st.markdown(
+        """
     **Algoritmos**
     - K-means
     - K-medoids
     - Optimización
-    """)
+    """
+    )
 
 with col3:
-    st.markdown("""
+    st.markdown(
+        """
     **Procesamiento**
     - NumPy
     - Pandas
     - SciPy
-    """)
+    """
+    )
 
 with col4:
-    st.markdown("""
+    st.markdown(
+        """
     **Formatos**
     - KML/GeoJSON
     - LaTeX
     - TXT/JSON
-    """)
+    """
+    )
 
 st.markdown("---")
 
 # Footer
-st.markdown("""
+st.markdown(
+    """
 ## 📞 Información Adicional
 
 Para más detalles sobre el proyecto, consulta el archivo `README.md` en el repositorio.
@@ -244,32 +281,41 @@ Para más detalles sobre el proyecto, consulta el archivo `README.md` en el repo
     <p><b>Sistema desarrollado por Equipo Garcés</b></p>
     <p>Versión 1.0.0 | Noviembre 2025</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Sidebar info
 with st.sidebar:
     st.markdown("---")
     st.markdown("### 📌 Navegación Rápida")
-    st.markdown("""
+    st.markdown(
+        """
     Selecciona una página del menú superior para comenzar:
 
     - **Automatización Lihueimo**: Optimización completa
     - **Optimización v2-v11**: Diferentes versiones
     - **Visualización**: Análisis visual
-    """)
+    """
+    )
 
     st.markdown("---")
     st.markdown("### ℹ️ Ayuda")
-    st.markdown("""
+    st.markdown(
+        """
     Si necesitas ayuda:
     1. Revisa el README.md
     2. Consulta la documentación
     3. Contacta al equipo de soporte
-    """)
+    """
+    )
 
     st.markdown("---")
-    st.markdown("""
+    st.markdown(
+        """
     <div style="text-align: center; font-size: 0.8rem; color: #666;">
         Made with ❤️ using Streamlit
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
