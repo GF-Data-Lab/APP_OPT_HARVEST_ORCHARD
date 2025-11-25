@@ -71,3 +71,9 @@ Thumbs.db
 temp/
 tmp/
 *.tmp
+.venv/
+*.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.py.tmp.*
