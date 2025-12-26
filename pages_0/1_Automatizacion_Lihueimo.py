@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
-import streamlit as st
-from typing import List, Dict, Tuple
-from math import ceil
 import ast
+from math import ceil
+from typing import Dict, List, Tuple
+
 import matplotlib.pyplot as plt
-import numpy as np
-from string import Template
-from pathlib import Path
-import io
-import base64
+import streamlit as st
 
 Punto = Tuple[float, float, str, int]  # (x, y, tipo, id)
+
 
 def generar_mapa_cuadrado_txt(
     arboles_por_hilera: List[int],
@@ -21,8 +17,7 @@ def generar_mapa_cuadrado_txt(
     extra_caras: int = 2,
     output_path: str = "mapa_por_capacidad_cuadrado.txt",
 ) -> Tuple[str, str]:
-    """
-    Construye el mapa y lo guarda como .txt (claves numéricas sin comillas).
+    """Construye el mapa y lo guarda como .txt (claves numéricas sin comillas).
     Devuelve la ruta de salida y el contenido txt.
     """
     assert len(arboles_por_hilera) >= 1, "Debe haber al menos 1 hilera."
@@ -62,8 +57,8 @@ def generar_mapa_cuadrado_txt(
 
     # Cálculo de "caras por clase" en base a capacidad y kg/árbol (y +2 caras para cuadrar)
     kg_por_cara = kg_por_arbol / 2.0
-    caras_min = ceil(capacidad_bin_kg / kg_por_cara)          # mínimo de caras para llenar
-    caras_por_clase = caras_min + extra_caras                 # "cuadrado" (ej: +2 => 32)
+    caras_min = ceil(capacidad_bin_kg / kg_por_cara)  # mínimo de caras para llenar
+    caras_por_clase = caras_min + extra_caras  # "cuadrado" (ej: +2 => 32)
 
     # Construcción de clases con tamaño fijo en caras (salvo última si no alcanza)
     clases: Dict[int, List[Punto]] = {}
@@ -78,28 +73,28 @@ def generar_mapa_cuadrado_txt(
         take = min(caras_por_clase, len(secuencia_caras) - idx)
         for _ in range(take):
             x, y = secuencia_caras[idx]
-            items.append((x, y, 'cara', cara_id_global))
+            items.append((x, y, "cara", cara_id_global))
             ys.append(y)
             cara_id_global += 1
             idx += 1
 
         # Bin centrado en Y dentro de la clase
         y_bin = (min(ys) + max(ys)) / 2.0 if ys else 0.0
-        items.append((x_bin, y_bin, 'bin', 1))
+        items.append((x_bin, y_bin, "bin", 1))
 
         clases[clase_idx] = items
         clase_idx += 1
 
     if not clases:
-        clases[1] = [(x_bin, 0.0, 'bin', 1)]
+        clases[1] = [(x_bin, 0.0, "bin", 1)]
 
     # Guardar como .txt con claves numéricas (sin comillas)
     def dict_to_text(d: Dict[int, List[Punto]]) -> str:
         lines = ["{"]
         for k in sorted(d.keys()):
             lines.append(f"  {k}: [")
-            for (x, y, tipo, idx_item) in d[k]:
-                lines.append(f"    [{x}, {y}, \"{tipo}\", {idx_item}],")
+            for x, y, tipo, idx_item in d[k]:
+                lines.append(f'    [{x}, {y}, "{tipo}", {idx_item}],')
             lines.append("  ],")
         lines.append("}")
         return "\n".join(lines)
@@ -113,8 +108,10 @@ def plot_hileras_arboles_y_pasillos(
     arboles_por_hilera,
     sep_hileras_m,
     sep_arboles_m,
-    HHOunB, primerHunB,
-    kgBarrer, kgBarrerdos,
+    HHOunB,
+    primerHunB,
+    kgBarrer,
+    kgBarrerdos,
     num_clases=4,
     margen_x=1.0,
     dpi=180,
@@ -124,9 +121,9 @@ def plot_hileras_arboles_y_pasillos(
     draw_aisles=True,
     bins_y=None,
     bins_xy=None,
-    bin_marker='o',
+    bin_marker="o",
     bin_size=40,
-    is_floreo=False
+    is_floreo=False,
 ):
     n_hileras = len(arboles_por_hilera)
     if n_hileras == 0:
@@ -134,7 +131,7 @@ def plot_hileras_arboles_y_pasillos(
 
     # X centers
     centros_x = [i * sep_hileras_m for i in range(n_hileras)]
-    etiquetas_x = [f"Hilera {i+1}" for i in range(n_hileras)]
+    etiquetas_x = [f"Hilera {i + 1}" for i in range(n_hileras)]
 
     # Aisles (1 bin/posición) if requested
     y_pasillos = [primerHunB + k * HHOunB for k in range(num_clases)] if draw_aisles else []
@@ -150,20 +147,26 @@ def plot_hileras_arboles_y_pasillos(
 
     # Hileras y árboles
     for i, cx in enumerate(centros_x):
-        ax.vlines(cx, y_min, y_max, linewidth=1, linestyles='dashed', color='gray', alpha=0.6)
+        ax.vlines(cx, y_min, y_max, linewidth=1, linestyles="dashed", color="gray", alpha=0.6)
         n_arboles = arboles_por_hilera[i]
         ys = [j * sep_arboles_m for j in range(n_arboles) if j * sep_arboles_m <= y_max]
         xs = [cx] * len(ys)
-        ax.scatter(xs, ys, s=14, color='green', alpha=0.7)
+        ax.scatter(xs, ys, s=14, color="green", alpha=0.7)
 
     # Dibujar pasillos
     x0 = min(centros_x) - margen_x
     x1 = max(centros_x) + margen_x
     Y = []
     for idx, y in enumerate(y_pasillos, start=1):
-        ax.hlines(y, x0, x1, linewidth=2, color='brown', alpha=0.5)
-        ax.annotate(f"Pasillo {idx}, {y:.1f} m", xy=(x1, y), xytext=(5, 2),
-                    textcoords="offset points", ha="left", va="bottom")
+        ax.hlines(y, x0, x1, linewidth=2, color="brown", alpha=0.5)
+        ax.annotate(
+            f"Pasillo {idx}, {y:.1f} m",
+            xy=(x1, y),
+            xytext=(5, 2),
+            textcoords="offset points",
+            ha="left",
+            va="bottom",
+        )
         Y.append(y)
 
     # Dibujar BINes según lista
@@ -173,7 +176,7 @@ def plot_hileras_arboles_y_pasillos(
     if bins_xy:
         xs, ys = zip(*bins_xy) if len(bins_xy) else ([], [])
         if xs:
-            ax.scatter(xs, ys, s=bin_size, marker=bin_marker, color='red', zorder=5)
+            ax.scatter(xs, ys, s=bin_size, marker=bin_marker, color="red", zorder=5)
     elif bins_y:
         if n_hileras >= 3:
             x_bin = (centros_x[1] + centros_x[2]) / 2.0
@@ -182,10 +185,17 @@ def plot_hileras_arboles_y_pasillos(
         else:
             x_bin = centros_x[0] + sep_hileras_m / 2.0
         xs = [x_bin] * len(bins_y)
-        ax.scatter(xs, bins_y, s=bin_size, marker=bin_marker, color='red', zorder=5)
+        ax.scatter(xs, bins_y, s=bin_size, marker=bin_marker, color="red", zorder=5)
         if bins_y:
-            ax.annotate("bines", xy=(x_bin, bins_y[0]), xytext=(0, 6),
-                        textcoords="offset points", ha="center", va="bottom", fontsize=9)
+            ax.annotate(
+                "bines",
+                xy=(x_bin, bins_y[0]),
+                xytext=(0, 6),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+            )
 
     # Ejes
     ax.set_xticks(centros_x, etiquetas_x, rotation=0)
@@ -230,27 +240,71 @@ def main():
     arboles_str = st.sidebar.text_input(
         "Árboles por hilera (lista)",
         "[60,60,60,60]",
-        help="Ejemplo: [60,60,60,60] para 4 hileras de 60 árboles cada una"
+        help="Ejemplo: [60,60,60,60] para 4 hileras de 60 árboles cada una",
     )
 
-    sep_hileras_m = st.sidebar.number_input("Separación entre hileras (m)", value=4.0, min_value=1.0, max_value=10.0, step=0.5)
-    sep_arboles_m = st.sidebar.number_input("Separación entre árboles (m)", value=2.0, min_value=0.5, max_value=5.0, step=0.5)
+    sep_hileras_m = st.sidebar.number_input(
+        "Separación entre hileras (m)",
+        value=4.0,
+        min_value=1.0,
+        max_value=10.0,
+        step=0.5,
+    )
+    sep_arboles_m = st.sidebar.number_input(
+        "Separación entre árboles (m)",
+        value=2.0,
+        min_value=0.5,
+        max_value=5.0,
+        step=0.5,
+    )
 
     # Parámetros de cosecha
     st.sidebar.subheader("Parámetros de Cosecha")
-    capacidad_bin_kg = st.sidebar.number_input("Capacidad del bin (kg)", value=300.0, min_value=50.0, max_value=1000.0, step=10.0)
-    kg_por_arbol_floreo = st.sidebar.number_input("Kg por árbol (floreo)", value=2.8, min_value=0.1, max_value=100.0, step=0.1)
-    kg_por_arbol_barrer = st.sidebar.number_input("Kg por árbol (barrer)", value=11.2, min_value=0.1, max_value=100.0, step=0.1)
+    capacidad_bin_kg = st.sidebar.number_input(
+        "Capacidad del bin (kg)",
+        value=300.0,
+        min_value=50.0,
+        max_value=1000.0,
+        step=10.0,
+    )
+    kg_por_arbol_floreo = st.sidebar.number_input(
+        "Kg por árbol (floreo)",
+        value=2.8,
+        min_value=0.1,
+        max_value=100.0,
+        step=0.1,
+    )
+    kg_por_arbol_barrer = st.sidebar.number_input(
+        "Kg por árbol (barrer)",
+        value=11.2,
+        min_value=0.1,
+        max_value=100.0,
+        step=0.1,
+    )
 
-    extra_caras = st.sidebar.number_input("Caras extra para cuadrar (barrer)", value=2, min_value=0, max_value=10, step=1)
-    extra_caras_floreo = st.sidebar.number_input("Caras extra para cuadrar (floreo)", value=2, min_value=0, max_value=10, step=1)
+    extra_caras = st.sidebar.number_input(
+        "Caras extra para cuadrar (barrer)",
+        value=2,
+        min_value=0,
+        max_value=10,
+        step=1,
+    )
+    extra_caras_floreo = st.sidebar.number_input(
+        "Caras extra para cuadrar (floreo)",
+        value=2,
+        min_value=0,
+        max_value=10,
+        step=1,
+    )
 
     # Botón de generar
     if st.sidebar.button("🚀 Generar Optimización", type="primary"):
         try:
             # Parse lista de árboles
             arboles_por_hilera = ast.literal_eval(arboles_str)
-            assert isinstance(arboles_por_hilera, list) and all(isinstance(x, int) and x >= 0 for x in arboles_por_hilera)
+            assert isinstance(arboles_por_hilera, list) and all(
+                isinstance(x, int) and x >= 0 for x in arboles_por_hilera
+            )
 
             with st.spinner("Generando mapas y optimizaciones..."):
                 # Generar mapas
@@ -276,31 +330,31 @@ def main():
 
                 _, txt_2_B = generar_mapa_cuadrado_txt(
                     arboles_por_hilera=arboles_por_hilera,
-                    capacidad_bin_kg=capacidad_bin_kg*2,
+                    capacidad_bin_kg=capacidad_bin_kg * 2,
                     kg_por_arbol=kg_por_arbol_barrer,
                     sep_hileras_m=sep_hileras_m,
                     sep_arboles_m=sep_arboles_m,
-                    extra_caras=extra_caras*2,
+                    extra_caras=extra_caras * 2,
                     output_path="barrer_2B.txt",
                 )
 
                 _, txt_3_B = generar_mapa_cuadrado_txt(
                     arboles_por_hilera=arboles_por_hilera,
-                    capacidad_bin_kg=capacidad_bin_kg*3,
+                    capacidad_bin_kg=capacidad_bin_kg * 3,
                     kg_por_arbol=kg_por_arbol_barrer,
                     sep_hileras_m=sep_hileras_m,
                     sep_arboles_m=sep_arboles_m,
-                    extra_caras=extra_caras*3,
+                    extra_caras=extra_caras * 3,
                     output_path="barrer_3B.txt",
                 )
 
                 _, txt_4_B = generar_mapa_cuadrado_txt(
                     arboles_por_hilera=arboles_por_hilera,
-                    capacidad_bin_kg=capacidad_bin_kg*4,
+                    capacidad_bin_kg=capacidad_bin_kg * 4,
                     kg_por_arbol=kg_por_arbol_barrer,
                     sep_hileras_m=sep_hileras_m,
                     sep_arboles_m=sep_arboles_m,
-                    extra_caras=extra_caras*4,
+                    extra_caras=extra_caras * 4,
                     output_path="barrer_4B.txt",
                 )
 
@@ -318,71 +372,98 @@ def main():
                 NBinesFloreo = len(d_floreo)
 
                 # Extraer posiciones de bines
-                H_H_1 = [row[1] for group in d_barrer.values() for row in group if len(row) >= 3 and row[2] == "bin"]
-                H_H_2 = [row[1] for group in d_barrer_2.values() for row in group if len(row) >= 3 and row[2] == "bin"]
-                H_H_3 = [row[1] for group in d_barrer_3.values() for row in group if len(row) >= 3 and row[2] == "bin"]
-                H_H_4 = [row[1] for group in d_barrer_4.values() for row in group if len(row) >= 3 and row[2] == "bin"]
-                H_H_F = [row[1] for group in d_floreo.values() for row in group if len(row) >= 3 and row[2] == "bin"]
+                H_H_1 = [
+                    row[1]
+                    for group in d_barrer.values()
+                    for row in group
+                    if len(row) >= 3 and row[2] == "bin"
+                ]
+                H_H_2 = [
+                    row[1]
+                    for group in d_barrer_2.values()
+                    for row in group
+                    if len(row) >= 3 and row[2] == "bin"
+                ]
+                H_H_3 = [
+                    row[1]
+                    for group in d_barrer_3.values()
+                    for row in group
+                    if len(row) >= 3 and row[2] == "bin"
+                ]
+                H_H_4 = [
+                    row[1]
+                    for group in d_barrer_4.values()
+                    for row in group
+                    if len(row) >= 3 and row[2] == "bin"
+                ]
+                H_H_F = [
+                    row[1]
+                    for group in d_floreo.values()
+                    for row in group
+                    if len(row) >= 3 and row[2] == "bin"
+                ]
 
                 # Guardar en session state
-                st.session_state['resultados'] = {
-                    'arboles_por_hilera': arboles_por_hilera,
-                    'sep_hileras_m': sep_hileras_m,
-                    'sep_arboles_m': sep_arboles_m,
-                    'kgBarrer': kg_por_arbol_barrer,
-                    'kgFloreo': kg_por_arbol_floreo,
-                    'kgBarrerdos': kgBarrerdos,
-                    'kgFloreodos': kgFloreodos,
-                    'NBinesBarrer': NBinesBarrer,
-                    'NBinesFloreo': NBinesFloreo,
-                    'H_H_1': H_H_1,
-                    'H_H_2': H_H_2,
-                    'H_H_3': H_H_3,
-                    'H_H_4': H_H_4,
-                    'H_H_F': H_H_F,
-                    'txt_barrer': txt_barrer,
-                    'txt_floreo': txt_floreo,
-                    'txt_2_B': txt_2_B,
-                    'txt_3_B': txt_3_B,
-                    'txt_4_B': txt_4_B,
-                    'd_barrer': d_barrer,
-                    'd_floreo': d_floreo,
-                    'campo': campo,
-                    'empresa': empresa,
-                    'fecha': fecha
+                st.session_state["resultados"] = {
+                    "arboles_por_hilera": arboles_por_hilera,
+                    "sep_hileras_m": sep_hileras_m,
+                    "sep_arboles_m": sep_arboles_m,
+                    "kgBarrer": kg_por_arbol_barrer,
+                    "kgFloreo": kg_por_arbol_floreo,
+                    "kgBarrerdos": kgBarrerdos,
+                    "kgFloreodos": kgFloreodos,
+                    "NBinesBarrer": NBinesBarrer,
+                    "NBinesFloreo": NBinesFloreo,
+                    "H_H_1": H_H_1,
+                    "H_H_2": H_H_2,
+                    "H_H_3": H_H_3,
+                    "H_H_4": H_H_4,
+                    "H_H_F": H_H_F,
+                    "txt_barrer": txt_barrer,
+                    "txt_floreo": txt_floreo,
+                    "txt_2_B": txt_2_B,
+                    "txt_3_B": txt_3_B,
+                    "txt_4_B": txt_4_B,
+                    "d_barrer": d_barrer,
+                    "d_floreo": d_floreo,
+                    "campo": campo,
+                    "empresa": empresa,
+                    "fecha": fecha,
                 }
 
                 st.success("✅ Optimización generada exitosamente!")
 
         except Exception as e:
-            st.error(f"❌ Error al procesar: {str(e)}")
+            st.error(f"❌ Error al procesar: {e!s}")
             st.error("Verifica que la lista de árboles tenga el formato correcto: [60,60,60,60]")
 
     # Mostrar resultados si existen
-    if 'resultados' in st.session_state:
-        res = st.session_state['resultados']
+    if "resultados" in st.session_state:
+        res = st.session_state["resultados"]
 
         # Tabs para organizar información
-        tab1, tab2, tab3, tab4 = st.tabs(["📊 Resumen", "🌲 Floreo", "🍎 Barrer", "📄 Archivos Generados"])
+        tab1, tab2, tab3, tab4 = st.tabs(
+            ["📊 Resumen", "🌲 Floreo", "🍎 Barrer", "📄 Archivos Generados"],
+        )
 
         with tab1:
             st.header("Resumen de Optimización")
 
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("Campo", res['campo'])
-                st.metric("Empresa", res['empresa'])
-                st.metric("Fecha", res['fecha'])
+                st.metric("Campo", res["campo"])
+                st.metric("Empresa", res["empresa"])
+                st.metric("Fecha", res["fecha"])
 
             with col2:
-                st.metric("Hileras", len(res['arboles_por_hilera']))
-                st.metric("Total Árboles", sum(res['arboles_por_hilera']))
-                st.metric("Sep. Hileras (m)", res['sep_hileras_m'])
+                st.metric("Hileras", len(res["arboles_por_hilera"]))
+                st.metric("Total Árboles", sum(res["arboles_por_hilera"]))
+                st.metric("Sep. Hileras (m)", res["sep_hileras_m"])
 
             with col3:
-                st.metric("Bines Floreo", res['NBinesFloreo'])
-                st.metric("Bines Barrer", res['NBinesBarrer'])
-                st.metric("Sep. Árboles (m)", res['sep_arboles_m'])
+                st.metric("Bines Floreo", res["NBinesFloreo"])
+                st.metric("Bines Barrer", res["NBinesBarrer"])
+                st.metric("Sep. Árboles (m)", res["sep_arboles_m"])
 
             st.subheader("📏 Pasillos Horizontales Óptimos")
 
@@ -390,107 +471,111 @@ def main():
 
             with pasillo_col1:
                 st.markdown("**Configuración con 1 bin por posición:**")
-                if len(res['H_H_1']) >= 2:
+                if len(res["H_H_1"]) >= 2:
                     st.write(f"- Cada {res['H_H_1'][1] - res['H_H_1'][0]:.1f} metros")
                     st.write(f"- Primer pasillo en el metro {res['H_H_1'][0]:.1f}")
 
                 st.markdown("**Configuración con 2 bines por posición:**")
-                if len(res['H_H_2']) >= 2:
+                if len(res["H_H_2"]) >= 2:
                     st.write(f"- Cada {res['H_H_2'][1] - res['H_H_2'][0]:.1f} metros")
                     st.write(f"- Primer pasillo en el metro {res['H_H_2'][0]:.1f}")
 
             with pasillo_col2:
                 st.markdown("**Configuración con 3 bines por posición:**")
-                if len(res['H_H_3']) >= 2:
+                if len(res["H_H_3"]) >= 2:
                     st.write(f"- Cada {res['H_H_3'][1] - res['H_H_3'][0]:.1f} metros")
                     st.write(f"- Primer pasillo en el metro {res['H_H_3'][0]:.1f}")
 
                 st.markdown("**Configuración con 4 bines por posición:**")
-                if len(res['H_H_4']) >= 2:
+                if len(res["H_H_4"]) >= 2:
                     st.write(f"- Cada {res['H_H_4'][1] - res['H_H_4'][0]:.1f} metros")
                     st.write(f"- Primer pasillo en el metro {res['H_H_4'][0]:.1f}")
 
         with tab2:
             st.header("🌲 Cosecha en Floreo")
 
-            st.markdown(f"""
+            st.markdown(
+                f"""
             **Información:**
-            - Se estima **{res['kgFloreo']} kg** de fruta por planta en floreo ({res['kgFloreodos']} kg por cara)
-            - Se recomienda colocar **{res['NBinesFloreo']} bines** equidistantes
+            - Se estima **{res["kgFloreo"]} kg** de fruta por planta en floreo ({res["kgFloreodos"]} kg por cara)
+            - Se recomienda colocar **{res["NBinesFloreo"]} bines** equidistantes
 
             **Indicaciones:**
             - Considerar 4 hileras de árboles
             - Colocar 2-3 personas por cada cara
             - En la calle de en medio colocar los bines
             - Ubicar bines cerca de los pasillos horizontales
-            """)
+            """
+            )
 
             # Generar gráfico floreo
-            if len(res['H_H_F']) >= 2:
+            if len(res["H_H_F"]) >= 2:
                 fig_floreo = plot_hileras_arboles_y_pasillos(
-                    arboles_por_hilera=res['arboles_por_hilera'],
-                    sep_hileras_m=res['sep_hileras_m'],
-                    sep_arboles_m=res['sep_arboles_m'],
-                    HHOunB=res['H_H_F'][1] - res['H_H_F'][0],
-                    primerHunB=res['H_H_F'][0],
-                    kgBarrer=res['kgFloreo'],
-                    kgBarrerdos=res['kgFloreodos'],
-                    num_clases=res['NBinesFloreo'],
+                    arboles_por_hilera=res["arboles_por_hilera"],
+                    sep_hileras_m=res["sep_hileras_m"],
+                    sep_arboles_m=res["sep_arboles_m"],
+                    HHOunB=res["H_H_F"][1] - res["H_H_F"][0],
+                    primerHunB=res["H_H_F"][0],
+                    kgBarrer=res["kgFloreo"],
+                    kgBarrerdos=res["kgFloreodos"],
+                    num_clases=res["NBinesFloreo"],
                     titulo="Disposición Óptima - Floreo",
-                    bins_y=res['H_H_F'],
+                    bins_y=res["H_H_F"],
                     draw_aisles=True,
-                    is_floreo=True
+                    is_floreo=True,
                 )
                 st.pyplot(fig_floreo)
 
         with tab3:
             st.header("🍎 Cosecha en Barrer")
 
-            st.markdown(f"""
+            st.markdown(
+                f"""
             **Información:**
-            - Se estima **{res['kgBarrer']} kg** de fruta por planta en barrer ({res['kgBarrerdos']} kg por cara)
-            - Se recomienda colocar **{res['NBinesBarrer']} bines** equidistantes
+            - Se estima **{res["kgBarrer"]} kg** de fruta por planta en barrer ({res["kgBarrerdos"]} kg por cara)
+            - Se recomienda colocar **{res["NBinesBarrer"]} bines** equidistantes
 
             **Indicaciones:**
             - Considerar 4 hileras de árboles
             - Colocar 2-3 personas por cada cara
             - En la calle de en medio colocar los bines
             - Ubicar bines cerca de los pasillos horizontales
-            """)
+            """
+            )
 
             # Generar gráfico barrer
-            if len(res['H_H_1']) >= 2:
+            if len(res["H_H_1"]) >= 2:
                 fig_barrer = plot_hileras_arboles_y_pasillos(
-                    arboles_por_hilera=res['arboles_por_hilera'],
-                    sep_hileras_m=res['sep_hileras_m'],
-                    sep_arboles_m=res['sep_arboles_m'],
-                    HHOunB=res['H_H_1'][1] - res['H_H_1'][0],
-                    primerHunB=res['H_H_1'][0],
-                    kgBarrer=res['kgBarrer'],
-                    kgBarrerdos=res['kgBarrerdos'],
-                    num_clases=res['NBinesBarrer'],
+                    arboles_por_hilera=res["arboles_por_hilera"],
+                    sep_hileras_m=res["sep_hileras_m"],
+                    sep_arboles_m=res["sep_arboles_m"],
+                    HHOunB=res["H_H_1"][1] - res["H_H_1"][0],
+                    primerHunB=res["H_H_1"][0],
+                    kgBarrer=res["kgBarrer"],
+                    kgBarrerdos=res["kgBarrerdos"],
+                    num_clases=res["NBinesBarrer"],
                     titulo="Disposición Óptima - Barrer",
-                    bins_y=res['H_H_1'],
+                    bins_y=res["H_H_1"],
                     draw_aisles=True,
-                    is_floreo=False
+                    is_floreo=False,
                 )
                 st.pyplot(fig_barrer)
 
             # Gráfico de pasillos horizontales
             st.subheader("Pasillos Horizontales (1 bin/posición)")
-            if len(res['H_H_1']) >= 2:
+            if len(res["H_H_1"]) >= 2:
                 fig_pasillos = plot_hileras_arboles_y_pasillos(
-                    arboles_por_hilera=res['arboles_por_hilera'],
-                    sep_hileras_m=res['sep_hileras_m'],
-                    sep_arboles_m=res['sep_arboles_m'],
-                    HHOunB=res['H_H_1'][1] - res['H_H_1'][0],
-                    primerHunB=res['H_H_1'][0],
-                    kgBarrer=res['kgBarrer'],
-                    kgBarrerdos=res['kgBarrerdos'],
+                    arboles_por_hilera=res["arboles_por_hilera"],
+                    sep_hileras_m=res["sep_hileras_m"],
+                    sep_arboles_m=res["sep_arboles_m"],
+                    HHOunB=res["H_H_1"][1] - res["H_H_1"][0],
+                    primerHunB=res["H_H_1"][0],
+                    kgBarrer=res["kgBarrer"],
+                    kgBarrerdos=res["kgBarrerdos"],
                     num_clases=6,
                     titulo="Pasillos Horizontales Óptimos",
-                    bins_y=res['H_H_1'],
-                    draw_aisles=True
+                    bins_y=res["H_H_1"],
+                    draw_aisles=True,
                 )
                 st.pyplot(fig_pasillos)
 
@@ -504,38 +589,38 @@ def main():
             with col1:
                 st.download_button(
                     label="📥 Descargar Mapa Floreo (.txt)",
-                    data=res['txt_floreo'],
+                    data=res["txt_floreo"],
                     file_name="mapa_floreo.txt",
-                    mime="text/plain"
+                    mime="text/plain",
                 )
 
                 st.download_button(
                     label="📥 Descargar Mapa Barrer (.txt)",
-                    data=res['txt_barrer'],
+                    data=res["txt_barrer"],
                     file_name="mapa_barrer.txt",
-                    mime="text/plain"
+                    mime="text/plain",
                 )
 
             with col2:
                 st.download_button(
                     label="📥 Descargar Mapa 2 Bines (.txt)",
-                    data=res['txt_2_B'],
+                    data=res["txt_2_B"],
                     file_name="mapa_2_bines.txt",
-                    mime="text/plain"
+                    mime="text/plain",
                 )
 
                 st.download_button(
                     label="📥 Descargar Mapa 3 Bines (.txt)",
-                    data=res['txt_3_B'],
+                    data=res["txt_3_B"],
                     file_name="mapa_3_bines.txt",
-                    mime="text/plain"
+                    mime="text/plain",
                 )
 
             st.download_button(
                 label="📥 Descargar Mapa 4 Bines (.txt)",
-                data=res['txt_4_B'],
+                data=res["txt_4_B"],
                 file_name="mapa_4_bines.txt",
-                mime="text/plain"
+                mime="text/plain",
             )
 
             # Vista previa de archivos
@@ -543,25 +628,28 @@ def main():
 
             preview_option = st.selectbox(
                 "Seleccionar mapa para vista previa:",
-                ["Floreo", "Barrer", "2 Bines", "3 Bines", "4 Bines"]
+                ["Floreo", "Barrer", "2 Bines", "3 Bines", "4 Bines"],
             )
 
             preview_map = {
-                "Floreo": res['txt_floreo'],
-                "Barrer": res['txt_barrer'],
-                "2 Bines": res['txt_2_B'],
-                "3 Bines": res['txt_3_B'],
-                "4 Bines": res['txt_4_B']
+                "Floreo": res["txt_floreo"],
+                "Barrer": res["txt_barrer"],
+                "2 Bines": res["txt_2_B"],
+                "3 Bines": res["txt_3_B"],
+                "4 Bines": res["txt_4_B"],
             }
 
             with st.expander("Ver contenido del mapa"):
                 st.code(preview_map[preview_option], language="python")
 
     else:
-        st.info("👈 Configure los parámetros en el panel lateral y presione 'Generar Optimización' para comenzar")
+        st.info(
+            "👈 Configure los parámetros en el panel lateral y presione 'Generar Optimización' para comenzar",
+        )
 
         # Mostrar información de ayuda
-        st.markdown("""
+        st.markdown(
+            """
         ### 🔍 Acerca de esta herramienta
 
         Esta aplicación permite optimizar la ubicación de bines en campos de cosecha mediante:
@@ -577,7 +665,8 @@ def main():
         - **Kg por árbol**: Estimación de fruta por árbol según tipo de cosecha
         - **Capacidad de bin**: Peso máximo que puede contener cada bin
         - **Caras extra**: Ajuste para "cuadrar" clases de cosecha
-        """)
+        """
+        )
 
 
 if __name__ == "__main__":

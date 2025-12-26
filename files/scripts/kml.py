@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
@@ -12,7 +13,7 @@ print(gdf.geometry.type.value_counts())
 if len(gdf) == 0:
     raise RuntimeError(
         "GeoDataFrame vacío ➜ tu instalación de GDAL/Fiona no tiene soporte KML.\n"
-        "Instala libkml o usa el método basado en fastkml."
+        "Instala libkml o usa el método basado en fastkml.",
     )
 
 # 2) (opcional) Dividir MultiGeometry en partes para verlas todas
@@ -23,4 +24,4 @@ ax = gdf.plot(facecolor="none", edgecolor="red", linewidth=1)
 ax.set_aspect("equal")
 ax.set_title("Parcelas del KML")
 plt.tight_layout()
-plt.show()           # ← imprescindible si NO estás en Jupyter / IPython
+plt.show()  # ← imprescindible si NO estás en Jupyter / IPython
