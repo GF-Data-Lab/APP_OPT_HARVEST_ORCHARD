@@ -1,5 +1,4 @@
-"""
-Streamlit app that allocates *k* harvest bins (medoids) in an orchard
+"""Streamlit app that allocates *k* harvest bins (medoids) in an orchard
 with blocked (row‑constrained) distances and per‑bin capacity
 constraints.
 
@@ -24,16 +23,17 @@ from __future__ import annotations
 import json
 import random
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any, Dict, List
 
+import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+from matplotlib import patches
 
 # ────────────────────────────────────────────────────────────────
 # 0 · Utilities to load orchard‑block JSON files by team
 # ────────────────────────────────────────────────────────────────
+
 
 def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
     """Return mapping ``team_name → list_of_blocks``.
@@ -43,7 +43,7 @@ def load_team_files(directory: str | Path = ".") -> Dict[str, List[dict]]:
     team_data: Dict[str, List[dict]] = {}
     for path in Path(directory).glob("equipo*.json"):
         try:
-            with open(path, "r", encoding="utf‑8") as fh:
+            with open(path, encoding="utf‑8") as fh:
                 data = json.load(fh)
             blocks = data.get("ORCHARD_BLOCKS", [])
             if isinstance(blocks, list):
@@ -79,33 +79,33 @@ def blocks_to_trees_per_face(block: dict) -> List[int]:
 # 1 · Core algorithm utilities (mostly unchanged from original)
 # ────────────────────────────────────────────────────────────────
 
+
 def run_kmedoids(params):
     """Run constrained k‑medoids and return rich results dict."""
-
     # ↳ deterministic reproducibility
     np.random.seed(params["seed"])
     random.seed(params["seed"])
 
     # Orchard geometry -----------------------------------------------------
-    rows        = len(params["trees_per_face"])
-    dx          = params["dx_row"]
-    dy          = params["dy_tree"]
-    w_row       = params["row_width"]
-    half_w      = w_row / 2.0
+    rows = len(params["trees_per_face"])
+    dx = params["dx_row"]
+    dy = params["dy_tree"]
+    w_row = params["row_width"]
+    half_w = w_row / 2.0
 
     trees = []  # (x, y, row, side)
     for r, n in enumerate(params["trees_per_face"]):
         xc = r * dx
-        for side in (0, 1):                               # 0 = west, 1 = east
+        for side in (0, 1):  # 0 = west, 1 = east
             x = xc + (-half_w if side == 0 else half_w)
             for k in range(n):
                 trees.append((x, k * dy, r, side))
     trees = np.asarray(trees, float)
 
-    XY       = trees[:, :2]
-    row_id   = trees[:, 2].astype(int)
+    XY = trees[:, :2]
+    row_id = trees[:, 2].astype(int)
     side_arr = trees[:, 3].astype(int)
-    N_tot    = len(trees)
+    N_tot = len(trees)
 
     ROW_TOP, ROW_BOT = (max(params["trees_per_face"]) - 1) * dy, 0.0
 
@@ -116,8 +116,8 @@ def run_kmedoids(params):
         if rp == rq and sp == sq:
             return np.linalg.norm(p - q)
         d_down = (p[1] - ROW_BOT) + (q[1] - ROW_BOT) + abs(p[0] - q[0])
-        d_up   = (ROW_TOP - p[1]) + (ROW_TOP - q[1]) + abs(p[0] - q[0])
-        return d_down if d_down < d_up else d_up
+        d_up = (ROW_TOP - p[1]) + (ROW_TOP - q[1]) + abs(p[0] - q[0])
+        return min(d_up, d_down)
 
     # Pre‑compute distance matrix (symmetric) ------------------------------
     D = np.zeros((N_tot, N_tot))
@@ -127,9 +127,9 @@ def run_kmedoids(params):
             D[i, j] = D[j, i] = d
 
     # Capacity checks ------------------------------------------------------
-    k          = params["k_bins"]
-    min_cap    = params["N_target"] - params["slack"]
-    max_cap    = params["N_target"] + params["slack"]
+    k = params["k_bins"]
+    min_cap = params["N_target"] - params["slack"]
+    max_cap = params["N_target"] + params["slack"]
     if k * max_cap < N_tot:
         raise ValueError(f"Capacidad insuficiente: {k}×{max_cap} < {N_tot} árboles. ")
 
@@ -222,6 +222,7 @@ def run_kmedoids(params):
 # 2 · Plotting helper
 # ────────────────────────────────────────────────────────────────
 
+
 def plot_orchard(res, params):
     """Return a matplotlib Figure visualising orchard + clusters."""
     XY, point_cluster, bin_xy = res["XY"], res["point_cluster"], res["bin_xy"]
@@ -233,12 +234,8 @@ def plot_orchard(res, params):
     # Rows (shaded blocks)
     for r in range(rows):
         xc = r * dx
-        ax.add_patch(
-            patches.Rectangle(
-                (xc - w_row / 2, 0), w_row, ROW_TOP, fc="#dddddd", ec="k"
-            )
-        )
-    
+        ax.add_patch(patches.Rectangle((xc - w_row / 2, 0), w_row, ROW_TOP, fc="#dddddd", ec="k"))
+
     # Trees coloured by cluster
     for c in range(k):
         pts = XY[point_cluster == c]
@@ -255,7 +252,7 @@ def plot_orchard(res, params):
         lw=1.2,
         label="Bins",
     )
-    
+
     # Paths (down or up headlands)
     for i in range(len(XY)):
         b = bin_xy[point_cluster[i]]
@@ -276,7 +273,7 @@ def plot_orchard(res, params):
     ax.set_xlabel("x (m)")
     ax.set_ylabel("y (m)")
     ax.set_title(
-        f"k‑medoids restringido  (k={res['k']}, target {params['N_target']}±{params['slack']})"
+        f"k‑medoids restringido  (k={res['k']}, target {params['N_target']}±{params['slack']})",
     )
     # 🆕 Legend placed OUTSIDE to avoid overlap
     ax.legend(
@@ -319,7 +316,9 @@ def main() -> None:  # pragma: no cover
 
     team_files = load_team_files()
     manual_option = "Entrada manual"
-    team_choices = [manual_option] + sorted([k for k, v in team_files.items() if not isinstance(v, Exception)])
+    team_choices = [manual_option] + sorted(
+        [k for k, v in team_files.items() if not isinstance(v, Exception)],
+    )
     equipo_sel = st.sidebar.selectbox("Equipo", team_choices)
 
     # Prepare the trees_per_face input depending on source --------------
@@ -346,9 +345,14 @@ def main() -> None:  # pragma: no cover
         else:
             # Build human‑friendly labels
             labels = [
-                f"{i+1} · {b['variedad']} (sector {b['sector']})" for i, b in enumerate(blocks_or_err)
+                f"{i + 1} · {b['variedad']} (sector {b['sector']})"
+                for i, b in enumerate(blocks_or_err)
             ]
-            idx = st.sidebar.selectbox("Bloque", range(len(labels)), format_func=lambda i: labels[i])
+            idx = st.sidebar.selectbox(
+                "Bloque",
+                range(len(labels)),
+                format_func=lambda i: labels[i],
+            )
             block_meta = blocks_or_err[idx]
             trees_per_face = blocks_to_trees_per_face(block_meta)
             # Show metadata summary
@@ -398,7 +402,7 @@ def main() -> None:  # pragma: no cover
         st.subheader("Resultados")
         st.markdown(
             f"**Distancia total caminada:** {res['total_dist']:.1f} m  "
-            f"**Total árboles:** {res['N_tot']}"
+            f"**Total árboles:** {res['N_tot']}",
         )
         cols = st.columns(res["k"])
         for c in range(res["k"]):
