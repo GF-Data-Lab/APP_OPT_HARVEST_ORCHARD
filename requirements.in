@@ -1,0 +1,10 @@
+geopandas==1.1.2
+matplotlib==3.10.8
+numpy==2.3.2
+ortools==9.14.6206
+pandas==2.2.3
+plotly==6.5.0
+pulp==3.2.2
+scikit-learn==1.8.0
+streamlit==1.48.1
+urllib3==2.6.0
